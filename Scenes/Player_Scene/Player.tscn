@@ -4,16 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="2_aeu4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1anp7"]
-size = Vector2(132, 132)
+size = Vector2(128, 128)
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+platform_wall_layers = 1
 script = ExtResource("1_j1ike")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_aeu4n")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-motion_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1anp7")
