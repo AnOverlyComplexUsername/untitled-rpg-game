@@ -4,3 +4,11 @@
 
 [node name="GameController" type="Node"]
 script = ExtResource("1_nqxm2")
+
+[node name="Game World" type="Node2D" parent="."]
+
+[node name="GUI Elements" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
