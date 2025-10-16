@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrf6p"]
 size = Vector2(127.58252, 128.39536)
 
-[node name="Node2D" type="Node2D"]
+[node name="Test2D Overworld" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_4ms0o")]
 position = Vector2(490, 350)
