@@ -1,7 +1,8 @@
-class_name GameController
+class_name SceneManager
 extends Node
-##global script that's referred to for current health, story flags, and other data
-##that needs to be carried between scenes 
+##Script used by Global script to manage and change scenes, 
+##All gameplay related scenes when displayed to the player should be displayed under 
+##SceneManager scene/node
 
 @export var overworld : Node2D 
 @export var gui : Control 
@@ -19,7 +20,7 @@ enum sceneAction {
 
 
 func _ready():
-	Global.game_controller = self
+	Global.scene_manager = self
 
 #Functions used for controlling & managing scenes
 func change_gui_scenes(new_scecne : String, state : sceneAction) -> void:

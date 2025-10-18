@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="UntitledRPGGame"
-run/main_scene="uid://cm2jcjr8a4juu"
+run/main_scene="uid://ccuvn0is77oe5"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://Assests/icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/Global.gd"
+Global="*res://Scripts/Game_Management/Global.gd"
+GameManager="*res://Scripts/Game_Management/GameManager.gd"
 
 [input]
 

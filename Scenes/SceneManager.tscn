@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccuvn0is77oe5"]
+
+[ext_resource type="Script" uid="uid://8ngj2l0aewnl" path="res://Scripts/Game_Management/SceneManager.gd" id="1_ebsso"]
+[ext_resource type="PackedScene" uid="uid://cm2jcjr8a4juu" path="res://Scenes/Test_Scene.tscn" id="2_hjya1"]
+
+[node name="SceneManager" type="Node" node_paths=PackedStringArray("overworld", "gui")]
+script = ExtResource("1_ebsso")
+overworld = NodePath("Overworld")
+gui = NodePath("GUI Elements")
+
+[node name="Overworld" type="Node2D" parent="."]
+
+[node name="Test2D Overworld" parent="Overworld" instance=ExtResource("2_hjya1")]
+
+[node name="GUI Elements" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
