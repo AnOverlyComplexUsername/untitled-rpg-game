@@ -12,4 +12,3 @@ func check_death():
 	if health <= 0:
 		get_parent().free() #deletes itself if health lower than 0
 	
- 
