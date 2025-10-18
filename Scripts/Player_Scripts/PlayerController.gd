@@ -1,7 +1,10 @@
 extends CharacterBody2D
 class_name Player 
 
-#todo: Finish basic top down 2d movement; thinking of using composition for this (?)
+#TODO: Finish basic top down 2d movement; thinking of using composition for this (?)
+
+#This script should contain all player movement/behavior code; 
+#stats & other player descriptors will be in GameController
 
 @export var speed : float = 200.0 
 

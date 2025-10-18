@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://0e4v288cvs8l"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 30.0
+text = "Change Scene"
