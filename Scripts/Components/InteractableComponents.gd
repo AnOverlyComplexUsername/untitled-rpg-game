@@ -11,22 +11,17 @@ class_name InteractableComponent
 ##Sprite that's attached to entity; used for toggling highlights
 @export var sprite : Sprite2D 
 
+##Signal emitted when player triggers interactable; signal caught by parent script
+signal interactable_signal()
+
 ##tween used for animating highlights
 var tween : Tween = null
 func _ready():
-	interactableArea.area_entered.connect(_player_entered)
-	interactableArea.area_exited.connect(_player_left)
 	disableOutline()
 	
-##checks if what entered interaction area is player; 
-func _player_entered(area : Area2D) -> void:
-	if area.get_parent() is Player and interactable:
-		enableOutline()
-
-##checks if player left and disables highlight
-func _player_left(area : Area2D) -> void:
-	if area.get_parent() is Player:
-		disableOutline()
+##Emits interactable signal when player interacts w/ entity for functionality
+func trigger_interactable() -> void:
+	interactable_signal.emit()
 
 ##Enables entity's player interactability 
 func enable_interactable() -> void:

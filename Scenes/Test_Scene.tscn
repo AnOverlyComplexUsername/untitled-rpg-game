@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm2jcjr8a4juu"]
+[gd_scene load_steps=6 format=3 uid="uid://cm2jcjr8a4juu"]
 
 [ext_resource type="PackedScene" uid="uid://beq2x1w1dqni3" path="res://Scenes/Player_Scene/Player.tscn" id="1_4ms0o"]
 [ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="2_mrf6p"]
 [ext_resource type="PackedScene" uid="uid://ciwitgdq0lq8p" path="res://Scenes/test_interactable.tscn" id="3_mwjvy"]
+[ext_resource type="PackedScene" uid="uid://dqwpntxokg4vs" path="res://Scenes/test_interactable2.tscn" id="4_10mtb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrf6p"]
 size = Vector2(127.58252, 128.39536)
@@ -26,4 +27,9 @@ scale = Vector2(0.99999976, 1)
 shape = SubResource("RectangleShape2D_mrf6p")
 
 [node name="TestInteractable" parent="." instance=ExtResource("3_mwjvy")]
-position = Vector2(739, 161)
+position = Vector2(676, 101)
+
+[node name="TestInteractable2" parent="." instance=ExtResource("4_10mtb")]
+position = Vector2(806, 307)
+
+[editable path="TestInteractable"]

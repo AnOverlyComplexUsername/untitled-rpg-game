@@ -9,11 +9,10 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1ike"]
 size = Vector2(184, 192)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("interactionTimer")]
+[node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 platform_wall_layers = 1
 script = ExtResource("1_j1ike")
-interactionTimer = NodePath("InteractionTimer")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_aeu4n")
@@ -26,10 +25,5 @@ shape = SubResource("RectangleShape2D_1anp7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_j1ike")
 
-[node name="InteractionTimer" type="Timer" parent="."]
-wait_time = 2.529
-one_shot = true
-
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]
-[connection signal="timeout" from="InteractionTimer" to="." method="_on_interaction_timer_timeout"]

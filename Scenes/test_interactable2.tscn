@@ -1,14 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciwitgdq0lq8p"]
+[gd_scene load_steps=7 format=3 uid="uid://dqwpntxokg4vs"]
 
-[ext_resource type="Script" uid="uid://cvxgrw5dxvufw" path="res://Scripts/Components/InteractableComponents.gd" id="1_vypad"]
-[ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Scenes/Player_Scene/OutlineShader.gdshader" id="2_qa54l"]
-[ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="3_7tvm6"]
+[ext_resource type="Script" uid="uid://cvxgrw5dxvufw" path="res://Scripts/Components/InteractableComponents.gd" id="1_fndlf"]
+[ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Scenes/Player_Scene/OutlineShader.gdshader" id="2_ccmc5"]
+[ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="3_tdije"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4rxc"]
 size = Vector2(104, 68)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i7fkn"]
-shader = ExtResource("2_qa54l")
+shader = ExtResource("2_ccmc5")
 shader_parameter/color = Color(1, 1, 1, 0)
 shader_parameter/width = 1.3950000662625
 shader_parameter/pattern = 2
@@ -21,7 +21,7 @@ size = Vector2(70, 42)
 [node name="TestInteractable" type="Node2D"]
 
 [node name="InteractableComponent" type="Node2D" parent="." node_paths=PackedStringArray("interactableArea", "sprite")]
-script = ExtResource("1_vypad")
+script = ExtResource("1_fndlf")
 interactableArea = NodePath("Area2D")
 sprite = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cvxgrw5dxvufw"
@@ -34,7 +34,7 @@ shape = SubResource("RectangleShape2D_n4rxc")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_i7fkn")
 scale = Vector2(0.5, 0.29687503)
-texture = ExtResource("3_7tvm6")
+texture = ExtResource("3_tdije")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
