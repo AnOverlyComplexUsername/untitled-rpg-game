@@ -1,16 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://beq2x1w1dqni3"]
+[gd_scene load_steps=5 format=3 uid="uid://beq2x1w1dqni3"]
 
 [ext_resource type="Script" uid="uid://dxay3utmtldn6" path="res://Scripts/Player_Scripts/PlayerController.gd" id="1_j1ike"]
-[ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Scenes/Player_Scene/OutlineShader.gdshader" id="2_1anp7"]
 [ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="2_aeu4n"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wj5aq"]
-shader = ExtResource("2_1anp7")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1anp7"]
 size = Vector2(128, 128)
@@ -24,7 +15,6 @@ platform_wall_layers = 1
 script = ExtResource("1_j1ike")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_wj5aq")
 texture = ExtResource("2_aeu4n")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
