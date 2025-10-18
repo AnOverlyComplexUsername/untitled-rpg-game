@@ -3,12 +3,12 @@ class_name Player
 
 #TODO: Finish basic top down 2d movement; thinking of using composition for this (?)
 
-#This script should contain all player movement/behavior code; 
-#stats & other player descriptors will be in GameController
+##This script should contain all player movement/behavior code; 
+##stats & other player descriptors will be in GameController
 
 @export var speed : float = 200.0 
 
-@export var canMove : bool = true #used to toggle/enable movement
+@export var canMove : bool = true ##used to toggle/enable movement
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -18,3 +18,10 @@ func _physics_process(_delta):
 	if canMove:
 		get_input()
 		move_and_slide()
+
+func disable_movement(): ##disables movement for player
+	canMove = false
+	
+func enable_movement(): ##enables movement for player
+	canMove = true
+	
