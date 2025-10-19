@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciwitgdq0lq8p"]
+[gd_scene load_steps=8 format=3 uid="uid://ciwitgdq0lq8p"]
 
+[ext_resource type="Script" uid="uid://b8d37w71yuyo5" path="res://Scenes/test_interactable.gd" id="1_qa54l"]
 [ext_resource type="Script" uid="uid://cvxgrw5dxvufw" path="res://Scripts/Components/InteractableComponents.gd" id="1_vypad"]
 [ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Scenes/Player_Scene/OutlineShader.gdshader" id="2_qa54l"]
 [ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="3_7tvm6"]
@@ -19,6 +20,7 @@ shader_parameter/add_margins = true
 size = Vector2(70, 42)
 
 [node name="TestInteractable" type="Node2D"]
+script = ExtResource("1_qa54l")
 
 [node name="InteractableComponent" type="Node2D" parent="." node_paths=PackedStringArray("interactableArea", "sprite")]
 script = ExtResource("1_vypad")
@@ -40,3 +42,5 @@ texture = ExtResource("3_7tvm6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_vypad")
+
+[connection signal="interactable_signal" from="InteractableComponent" to="." method="_on_interactable_component_interactable_signal"]
