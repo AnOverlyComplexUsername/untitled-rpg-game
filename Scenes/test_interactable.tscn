@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8d37w71yuyo5" path="res://Scenes/test_interactable.gd" id="1_qa54l"]
 [ext_resource type="Script" uid="uid://cvxgrw5dxvufw" path="res://Scripts/Components/InteractableComponents.gd" id="1_vypad"]
-[ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Scenes/Player_Scene/OutlineShader.gdshader" id="2_qa54l"]
+[ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Assests/OutlineShader.gdshader" id="2_qa54l"]
 [ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="3_7tvm6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4rxc"]

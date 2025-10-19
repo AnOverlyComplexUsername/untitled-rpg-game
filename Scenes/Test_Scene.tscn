@@ -30,6 +30,6 @@ shape = SubResource("RectangleShape2D_mrf6p")
 position = Vector2(676, 101)
 
 [node name="TestInteractable2" parent="." instance=ExtResource("4_10mtb")]
-position = Vector2(806, 307)
+position = Vector2(841, 304)
 
 [editable path="TestInteractable"]

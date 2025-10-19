@@ -15,7 +15,8 @@ var currentGui : Control
 enum sceneAction {
 	DELETE, ##DELETE will remove from memory
 	HIDE, ##HIDE will hide scene, keep it running, and keep it memory 
-	REMOVE  ##REMOVE will keep scene in memory but not  run
+	REMOVE,  ##REMOVE will keep scene in memory but not  run
+	ADD ## ADD will add a new scene on top, will not affect any other scenes
 	}
 
 
