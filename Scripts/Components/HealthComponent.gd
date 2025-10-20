@@ -4,16 +4,21 @@ extends AbstractComponent
 ##Player to damage them; player will use a different method in GameManager for damage
 class_name HealthComponent
 
+##Signal emitted on death; can be used to trigger post death effects
+signal death()
+
 @export var health : int = 100
+@export var damagable : bool = true
 
 func damage(d : int) -> int: ##Damages health and returns remaining health 
-	health -= d
-	check_death()
+	if damagable: 
+		health -= d
+		check_death()
 	return health
 	
 
 func check_death() -> void: 
 	if health <= 0:
-		get_parent().free() #deletes itself if health lower than 0
+		death.emit()
 ##TODO: Add death annimation before deleting at some point 
 	
