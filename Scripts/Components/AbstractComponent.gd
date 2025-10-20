@@ -1,9 +1,9 @@
 @abstract 
+##abstract component; has functions for enabling/disabling itself
 class_name AbstractComponent
 extends Node2D
-#abstract component; has functions for enabling/disabling itself
-func enable():
+func enable(): ##Enables Component Functionality
 	self.enable()
 	
-func disable():
+func disable(): ##Disables Component Functionality
 	self.disable()
