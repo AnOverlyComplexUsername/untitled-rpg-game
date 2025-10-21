@@ -25,4 +25,7 @@ func set_targetted_limb(limb : Limb):
 	targettedEnemyLimb = limb
 	 
 func set_hovered_limb(limb : Limb):
+	print(hoveredEnemyLimb)
 	hoveredEnemyLimb = limb
+	print(limb)
+	
