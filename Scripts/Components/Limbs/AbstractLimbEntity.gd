@@ -8,8 +8,6 @@ class_name AbstractLimbEntity
 @export var healthComp : HealthComponent ##tracks health properly
 @export var clickArea : Area2D ##Used to detect when the mouse is hovering/selecting
 @export var targettable : bool = true ##specfies if the player can target and attack it or not
-@export var attachedLimbs : Array[AbstractLimbEntity]
-##Probably preferable to just nest limbs if they're connect to eachother 
 
 func _ready():
 	healthComp.health = health
