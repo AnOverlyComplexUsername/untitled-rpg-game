@@ -8,3 +8,17 @@ script = ExtResource("1_xo6tu")
 
 [node name="TestEnemy" parent="." instance=ExtResource("1_udf6e")]
 position = Vector2(548, 243)
+
+[node name="BattleUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="BattleUI"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 364.0
+offset_right = 240.0
+offset_bottom = 382.0
+text = "Attack"
