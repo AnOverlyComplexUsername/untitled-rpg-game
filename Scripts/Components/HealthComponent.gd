@@ -6,16 +6,26 @@ class_name HealthComponent
 
 ##Signal emitted on death; can be used to trigger post death effects
 signal death()
-
-@export var health : int = 100
+signal healthDamaged()
+signal healthHealed()
+@export var maxHealth : int = 100
+var health : int = 100
 @export var damagable : bool = true
 
+func _ready():
+	health = maxHealth
 func damage(d : int) -> int: ##Damages health and returns remaining health 
 	if damagable: 
 		health -= d
 		check_death()
+		print(health)
+		healthDamaged.emit()
 	return health
-	
+
+func heal(h : int) -> int: ##Heals health and returns remaining health
+	health = clampi(health + h, 0, maxHealth)
+	healthHealed.emit()
+	return health 
 
 func check_death() -> void: 
 	if health <= 0:

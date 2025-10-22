@@ -3,8 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://vmghssv4d8ta" path="res://Scenes/Enemy_Scene/Test_enemy/test_enemy.tscn" id="1_udf6e"]
 [ext_resource type="Script" uid="uid://thjuq4rxpwtb" path="res://Scripts/Game_Management/BattleManager.gd" id="1_xo6tu"]
 
-[node name="BattleScene" type="Node2D"]
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("attackButton")]
 script = ExtResource("1_xo6tu")
+attackButton = NodePath("BattleUI/Button")
 
 [node name="TestEnemy" parent="." instance=ExtResource("1_udf6e")]
 position = Vector2(548, 243)
@@ -22,3 +23,5 @@ offset_top = 358.0
 offset_right = 283.0
 offset_bottom = 389.0
 text = "Attack"
+
+[connection signal="pressed" from="BattleUI/Button" to="." method="_on_button_pressed"]

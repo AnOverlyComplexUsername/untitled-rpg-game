@@ -7,9 +7,12 @@ var selected : bool = false
 var selectedColor : Color = Color("ffffffff")
 var deselectedColor : Color = Color("ffffff00")
 var hoverColor : Color = Color("ffffff60")
-
+var hitColor : Color =  Color("ff0034ff")
 func on_death() -> void:
 	self.queue_free()
+
+func on_hit():
+	pass
 
 func mouse_hover() -> void:
 	if targettable:
@@ -31,5 +34,4 @@ func select():
 
 func deselect():
 	selected = false
-	print('deselected')
 	self.get_material().set_shader_parameter("color", deselectedColor)
