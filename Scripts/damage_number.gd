@@ -9,7 +9,6 @@ var damage : int = 0
 static func new_popup(d : int, p : Vector2 = Vector2(0,0)) -> damageNumPopup:
 	var new : damageNumPopup = scene.instantiate()
 	new.damage = d
-	print(p)
 	new.global_position = p
 	return new
 	

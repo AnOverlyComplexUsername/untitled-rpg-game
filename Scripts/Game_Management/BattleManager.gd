@@ -53,6 +53,7 @@ func next_limb_turn() -> void:
 	playerEntity.Limbs[limbTurn].deselect()
 	if limbTurn + 1 < playerEntity.Limbs.size():
 		limbTurn += 1
+		print(playerEntity.Limbs.size())
 		playerEntity.Limbs[limbTurn].select()
 		backButton.disabled = false
 	else:
@@ -67,11 +68,12 @@ func next_turn() -> void:
 		playersTurn = true
 		limbTurn = 0 
 		turnText.text = "Player's turn; Turn: " + str(turnNumber)
-		update_player_limb_selection()
 		for buttons : Button in playerUIElements:
 			buttons.disabled = false #TODO: At somepoint make this cleaner
 		endTurnButton.disabled = true
 		backButton.disabled = true
+		update_player_limb_selection()
+
 	else:
 		playersTurn = false
 		turnText.text = "Enemy's turn; Turn: " + str(turnNumber)
@@ -102,8 +104,14 @@ func set_targetted_limb(limb : Limb) -> void:
 	 
 ##Updates which limb should be currently selected
 func update_player_limb_selection(): 
-	for i : int in playerEntity.Limbs.size():
+	var i : int = 0
+	while i < playerEntity.Limbs.size():
+		if !is_instance_valid(playerEntity.Limbs[i]) or playerEntity.Limbs[i] == null:
+			playerEntity.Limbs.remove_at(i)
+			i -= 1
 		playerEntity.Limbs[i].deselect()
+		i += 1
+		
 	playerEntity.Limbs[limbTurn].select()
 
 func set_hovered_limb(limb : Limb) -> void:
@@ -112,7 +120,9 @@ func set_hovered_limb(limb : Limb) -> void:
 	##Locks selected target for limb to attack/act on 
 func lock_targetted_limb() -> void: 
 	if targettedEnemyLimb != null:
-		playerEntity.Limbs[limbTurn].target_limb(targettedEnemyLimb)
+		update_player_limb_selection()
+		if is_instance_valid(playerEntity.Limbs[limbTurn]):
+			playerEntity.Limbs[limbTurn].target_limb(targettedEnemyLimb)
 		targettedEnemyLimb.deselect()
 		targettedEnemyLimb = null
 		next_limb_turn()

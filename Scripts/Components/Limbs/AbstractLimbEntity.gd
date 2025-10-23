@@ -16,8 +16,9 @@ class_name AbstractLimbEntity
 
 func _ready():
 	healthComp.health = maxHealth
+	healthComp.maxHealth = maxHealth
 	healthComp.death.connect(on_death)
-	healthComp.death.connect(on_hit)
+	healthComp.healthDamaged.connect(on_hit)
 	clickArea.mouse_entered.connect(mouse_hover)
 	clickArea.mouse_exited.connect(mouse_leave)
 @abstract func on_death() ##Determines what the limb does when it's destroyed

@@ -42,7 +42,7 @@ damage = 5
 hitChance = 100.0
 maxHealth = 20
 healthComp = NodePath("HealthComponent")
-clickArea = NodePath("HealthComponent/Area2D")
+clickArea = NodePath("Area2D")
 targettable = false
 metadata/_custom_type_script = "uid://c4w13j1l07rr2"
 
@@ -50,9 +50,9 @@ metadata/_custom_type_script = "uid://c4w13j1l07rr2"
 script = ExtResource("5_iq55f")
 metadata/_custom_type_script = "uid://c5k73mydwjfa6"
 
-[node name="Area2D" type="Area2D" parent="AttackingLimb/HealthComponent"]
+[node name="Area2D" type="Area2D" parent="AttackingLimb"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackingLimb/HealthComponent/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackingLimb/Area2D"]
 position = Vector2(-100, 62)
 shape = SubResource("RectangleShape2D_tghgk")
 
@@ -64,7 +64,7 @@ damage = 5
 hitChance = 100.0
 maxHealth = 20
 healthComp = NodePath("HealthComponent")
-clickArea = NodePath("HealthComponent/Area2D")
+clickArea = NodePath("Area2D")
 targettable = false
 metadata/_custom_type_script = "uid://c4w13j1l07rr2"
 
@@ -72,8 +72,8 @@ metadata/_custom_type_script = "uid://c4w13j1l07rr2"
 script = ExtResource("5_iq55f")
 metadata/_custom_type_script = "uid://c5k73mydwjfa6"
 
-[node name="Area2D" type="Area2D" parent="AttackingLimb2/HealthComponent"]
+[node name="Area2D" type="Area2D" parent="AttackingLimb2"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackingLimb2/HealthComponent/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackingLimb2/Area2D"]
 position = Vector2(88, 60)
 shape = SubResource("RectangleShape2D_8g268")

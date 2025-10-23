@@ -7,6 +7,7 @@ var target : Limb = null
 var actionable : bool = true
 
 func _ready():
+	super._ready()
 	targettable = false
 
 func target_limb(l : Limb) -> void:
@@ -16,9 +17,7 @@ func attack(limb : AbstractLimbEntity) -> void:
 	if actionable:
 		super.attack(limb)
 	
-	
-func on_death(): ##Determines what the limb does when it's destroyed:
-	pass
+
 
 func mouse_hover(): ##What happens when mouse hovers over attackable limb:
 	pass
