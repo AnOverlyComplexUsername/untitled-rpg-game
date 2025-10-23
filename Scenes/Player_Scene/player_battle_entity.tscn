@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ca4od37vyr0tw"]
+[gd_scene load_steps=11 format=3 uid="uid://ca4od37vyr0tw"]
 
 [ext_resource type="Script" uid="uid://6h1mulf7snnx" path="res://Scripts/Player_Scripts/Player_Combat/PlayerBattleEntity.gd" id="1_tghgk"]
 [ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Assests/OutlineShader.gdshader" id="2_8g268"]
@@ -15,6 +15,9 @@ shader_parameter/pattern = 2
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tghgk"]
+size = Vector2(58.75, 76.75)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0f7gp"]
 shader = ExtResource("2_8g268")
 shader_parameter/color = Color(1, 1, 1, 0)
@@ -22,6 +25,9 @@ shader_parameter/width = 2.32800011058
 shader_parameter/pattern = 2
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8g268"]
+size = Vector2(59, 77)
 
 [node name="PlayerBattleEntity" type="Node2D" node_paths=PackedStringArray("Limbs")]
 script = ExtResource("1_tghgk")
@@ -46,6 +52,10 @@ metadata/_custom_type_script = "uid://c5k73mydwjfa6"
 
 [node name="Area2D" type="Area2D" parent="AttackingLimb/HealthComponent"]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackingLimb/HealthComponent/Area2D"]
+position = Vector2(-100, 62)
+shape = SubResource("RectangleShape2D_tghgk")
+
 [node name="AttackingLimb2" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
 material = SubResource("ShaderMaterial_0f7gp")
 texture = ExtResource("6_q054c")
@@ -63,3 +73,7 @@ script = ExtResource("5_iq55f")
 metadata/_custom_type_script = "uid://c5k73mydwjfa6"
 
 [node name="Area2D" type="Area2D" parent="AttackingLimb2/HealthComponent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackingLimb2/HealthComponent/Area2D"]
+position = Vector2(88, 60)
+shape = SubResource("RectangleShape2D_8g268")
