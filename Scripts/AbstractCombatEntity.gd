@@ -9,3 +9,5 @@ class_name AbstractCombatEntity
 ##Determines priority of who moves, higher number moves first
 ## By default it goes player then enemy, from left to right
 @export var movePriority : int = 0
+
+@abstract func attack() -> void

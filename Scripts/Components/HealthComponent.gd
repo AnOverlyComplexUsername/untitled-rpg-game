@@ -18,7 +18,6 @@ func damage(d : int) -> int: ##Damages health and returns remaining health
 	if damagable: 
 		health -= d
 		check_death()
-		print(health)
 		healthDamaged.emit()
 	return health
 

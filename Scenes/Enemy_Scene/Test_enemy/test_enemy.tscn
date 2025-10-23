@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://vmghssv4d8ta"]
+[gd_scene load_steps=17 format=3 uid="uid://vmghssv4d8ta"]
 
+[ext_resource type="Script" uid="uid://cmd8bkpj03gi8" path="res://Scripts/Enemy_Scripts/test_enemy.gd" id="1_7wvyl"]
 [ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Assests/OutlineShader.gdshader" id="1_cwfix"]
 [ext_resource type="Script" uid="uid://cbbgx2vt87v1m" path="res://Scripts/Components/Limbs/Limb.gd" id="2_7wvyl"]
 [ext_resource type="Script" uid="uid://c5k73mydwjfa6" path="res://Scripts/Components/HealthComponent.gd" id="2_bbpht"]
+[ext_resource type="Script" uid="uid://rqj3x8xx67g5" path="res://Scripts/Components/Limbs/AttackingLimb.gd" id="5_x0j1h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mslg6"]
 resource_local_to_scene = true
@@ -60,7 +62,9 @@ load_path = "res://.godot/imported/rightArmpng.png-2f928001433099ee996cc63047ddb
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o3ido"]
 size = Vector2(106.70196, 188.44939)
 
-[node name="TestEnemy" type="Node2D"]
+[node name="TestEnemy" type="Node2D" node_paths=PackedStringArray("Limbs")]
+script = ExtResource("1_7wvyl")
+Limbs = [NodePath("Torso"), NodePath("Torso/Head"), NodePath("Torso/LeftArm"), NodePath("Torso/RightArm")]
 
 [node name="Torso" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
 material = SubResource("ShaderMaterial_mslg6")
@@ -81,7 +85,7 @@ material = SubResource("ShaderMaterial_x0j1h")
 scale = Vector2(0.9940977, 0.99409807)
 texture = SubResource("CompressedTexture2D_4paqk")
 script = ExtResource("2_7wvyl")
-maxHealth = 20
+maxHealth = 10
 healthComp = NodePath("HealthComponent")
 clickArea = NodePath("HeadArea")
 metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
@@ -102,11 +106,13 @@ shape = SubResource("CircleShape2D_cwfix")
 material = SubResource("ShaderMaterial_o3ido")
 scale = Vector2(0.984947, 0.98823094)
 texture = SubResource("CompressedTexture2D_k1rst")
-script = ExtResource("2_7wvyl")
-maxHealth = 100
+script = ExtResource("5_x0j1h")
+damage = 340
+hitChance = 100.0
+maxHealth = 10
 healthComp = NodePath("HealthComponent")
 clickArea = NodePath("LeftArmArea")
-metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
+metadata/_custom_type_script = "uid://rqj3x8xx67g5"
 
 [node name="HealthComponent" type="Node2D" parent="Torso/LeftArm"]
 script = ExtResource("2_bbpht")
@@ -122,11 +128,13 @@ shape = SubResource("RectangleShape2D_cwfix")
 material = SubResource("ShaderMaterial_2jrto")
 scale = Vector2(0.9882302, 0.98823094)
 texture = SubResource("CompressedTexture2D_r7anc")
-script = ExtResource("2_7wvyl")
-maxHealth = 100
+script = ExtResource("5_x0j1h")
+damage = 5
+hitChance = 100.0
+maxHealth = 10
 healthComp = NodePath("HealthComponent")
 clickArea = NodePath("RightArmArea")
-metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
+metadata/_custom_type_script = "uid://rqj3x8xx67g5"
 
 [node name="HealthComponent" type="Node2D" parent="Torso/RightArm"]
 script = ExtResource("2_bbpht")

@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://ca4od37vyr0tw"]
+
+[ext_resource type="Script" uid="uid://6h1mulf7snnx" path="res://Scripts/Player_Scripts/Player_Combat/PlayerBattleEntity.gd" id="1_tghgk"]
+[ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Assests/OutlineShader.gdshader" id="2_8g268"]
+[ext_resource type="Texture2D" uid="uid://bq7jutro05kq4" path="res://Assests/Enemy_Assests/TestEnemy Assests/leftArmpng.png" id="3_1do4d"]
+[ext_resource type="Script" uid="uid://c4w13j1l07rr2" path="res://Scripts/Components/Limbs/PlayerLimb.gd" id="4_3peti"]
+[ext_resource type="Script" uid="uid://c5k73mydwjfa6" path="res://Scripts/Components/HealthComponent.gd" id="5_iq55f"]
+[ext_resource type="Texture2D" uid="uid://bbk8b8saar21b" path="res://Assests/Enemy_Assests/TestEnemy Assests/rightArmpng.png" id="6_q054c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t1xl5"]
+shader = ExtResource("2_8g268")
+shader_parameter/color = Color(1, 1, 1, 0)
+shader_parameter/width = 2.32800011058
+shader_parameter/pattern = 2
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0f7gp"]
+shader = ExtResource("2_8g268")
+shader_parameter/color = Color(1, 1, 1, 0)
+shader_parameter/width = 2.32800011058
+shader_parameter/pattern = 2
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="PlayerBattleEntity" type="Node2D" node_paths=PackedStringArray("Limbs")]
+script = ExtResource("1_tghgk")
+Limbs = [NodePath("AttackingLimb"), NodePath("AttackingLimb2")]
+metadata/_custom_type_script = "uid://6h1mulf7snnx"
+
+[node name="AttackingLimb" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
+material = SubResource("ShaderMaterial_t1xl5")
+texture = ExtResource("3_1do4d")
+script = ExtResource("4_3peti")
+damage = 5
+hitChance = 100.0
+maxHealth = 20
+healthComp = NodePath("HealthComponent")
+clickArea = NodePath("HealthComponent/Area2D")
+targettable = false
+metadata/_custom_type_script = "uid://c4w13j1l07rr2"
+
+[node name="HealthComponent" type="Node2D" parent="AttackingLimb"]
+script = ExtResource("5_iq55f")
+metadata/_custom_type_script = "uid://c5k73mydwjfa6"
+
+[node name="Area2D" type="Area2D" parent="AttackingLimb/HealthComponent"]
+
+[node name="AttackingLimb2" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
+material = SubResource("ShaderMaterial_0f7gp")
+texture = ExtResource("6_q054c")
+script = ExtResource("4_3peti")
+damage = 5
+hitChance = 100.0
+maxHealth = 20
+healthComp = NodePath("HealthComponent")
+clickArea = NodePath("HealthComponent/Area2D")
+targettable = false
+metadata/_custom_type_script = "uid://c4w13j1l07rr2"
+
+[node name="HealthComponent" type="Node2D" parent="AttackingLimb2"]
+script = ExtResource("5_iq55f")
+metadata/_custom_type_script = "uid://c5k73mydwjfa6"
+
+[node name="Area2D" type="Area2D" parent="AttackingLimb2/HealthComponent"]
