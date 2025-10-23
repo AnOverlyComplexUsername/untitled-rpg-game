@@ -7,6 +7,7 @@ var money : int = 0 ## amount of money player has
 
 func _ready():
 	Global.game_manager = self
+	
 
 ##Damages the player; named differently to avoid confusion with enemy damage fucntion
 ## Returns remaining playerHealth 

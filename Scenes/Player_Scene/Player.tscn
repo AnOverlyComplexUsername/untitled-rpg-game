@@ -27,7 +27,7 @@ shape = SubResource("RectangleShape2D_1anp7")
 shape = SubResource("RectangleShape2D_j1ike")
 
 [node name="InteractionTimer" type="Timer" parent="."]
-wait_time = 2.529
+wait_time = 0.5
 one_shot = true
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]

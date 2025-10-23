@@ -7,16 +7,15 @@ extends Node
 @export var overworld : Node2D 
 @export var gui : Control 
 
-var currentOverworld : Node2D
-var currentGui : Control
+@export var currentOverworld : Node2D
+@export var currentGui : Control
 
 
-##enum states for how a scene change is handled
+##enum states for how the previous scene is handled when changing 
 enum sceneAction {
 	DELETE, ##DELETE will remove from memory
 	HIDE, ##HIDE will hide scene, keep it running, and keep it memory 
 	REMOVE,  ##REMOVE will keep scene in memory but not  run
-	ADD ## ADD will add a new scene on top, will not affect any other scenes
 	}
 
 
@@ -30,22 +29,23 @@ func change_gui_scenes(new_scecne : String, state : sceneAction) -> void:
 			sceneAction.DELETE:
 				currentGui.queue_free() 
 			sceneAction.HIDE:
-				currentGui.visible = false #in memory, running, hiddem
+				currentGui.visible = false #in memory, running, hidde
 			sceneAction.REMOVE:
 				gui.remove_child(currentGui) #in memory, not running
-	var new = load(new_scecne)
+	var new = load(new_scecne).instantiate()
 	gui.add_child(new)
 	currentGui = new
 	
 func change_overworld_scenes(new_scecne : String, state : sceneAction) -> void:
-	if currentGui != null:
+	if currentOverworld != null:
 		match state:
 			sceneAction.DELETE:
-				currentGui.queue_free() 
+				currentOverworld.queue_free() 
 			sceneAction.HIDE:
-				currentGui.visible = false#in memory, running, hiddem
+				currentOverworld.visible = false#in memory, running, hiddem
+				currentOverworld.process_mode = Node.PROCESS_MODE_DISABLED
 			sceneAction.REMOVE:
-				gui.remove_child(currentGui) #in memory, not running
-	var new = load(new_scecne)
-	currentOverworld.add_child(new)
+				overworld.remove_child(currentOverworld) #in memory, not running
+	var new = load(new_scecne).instantiate()
+	overworld.add_child(new)
 	currentOverworld = new

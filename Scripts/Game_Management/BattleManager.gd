@@ -25,7 +25,7 @@ func _ready():
 	attackButton.button_down.connect(lock_targetted_limb)
 	endTurnButton.button_down.connect(end_turn)
 	endTurnButton.disabled = true
-	start_combat()
+	#start_combat()
 
 func _input(event):
 	# Mouse in viewport coordinates.

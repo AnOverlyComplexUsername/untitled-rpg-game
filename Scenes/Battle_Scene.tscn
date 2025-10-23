@@ -1,29 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpwv3cncla3jc"]
+[gd_scene load_steps=4 format=3 uid="uid://dpwv3cncla3jc"]
 
 [ext_resource type="PackedScene" uid="uid://vmghssv4d8ta" path="res://Scenes/Enemy_Scene/Test_enemy/test_enemy.tscn" id="1_udf6e"]
 [ext_resource type="Script" uid="uid://thjuq4rxpwtb" path="res://Scripts/Game_Management/BattleManager.gd" id="1_xo6tu"]
-[ext_resource type="Script" uid="uid://6h1mulf7snnx" path="res://Scripts/Player_Scripts/Player_Combat/PlayerBattleEntity.gd" id="3_k7uhl"]
-[ext_resource type="Texture2D" uid="uid://bq7jutro05kq4" path="res://Assests/Enemy_Assests/TestEnemy Assests/leftArmpng.png" id="4_6t38w"]
-[ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Assests/OutlineShader.gdshader" id="4_lo6j6"]
-[ext_resource type="Script" uid="uid://c5k73mydwjfa6" path="res://Scripts/Components/HealthComponent.gd" id="5_5lp65"]
-[ext_resource type="Script" uid="uid://c4w13j1l07rr2" path="res://Scripts/Components/Limbs/PlayerLimb.gd" id="6_lo6j6"]
-[ext_resource type="Texture2D" uid="uid://bbk8b8saar21b" path="res://Assests/Enemy_Assests/TestEnemy Assests/rightArmpng.png" id="7_lo6j6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t1xl5"]
-shader = ExtResource("4_lo6j6")
-shader_parameter/color = Color(1, 1, 1, 0)
-shader_parameter/width = 2.32800011058
-shader_parameter/pattern = 2
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0f7gp"]
-shader = ExtResource("4_lo6j6")
-shader_parameter/color = Color(1, 1, 1, 0)
-shader_parameter/width = 2.32800011058
-shader_parameter/pattern = 2
-shader_parameter/inside = false
-shader_parameter/add_margins = true
+[ext_resource type="PackedScene" uid="uid://ca4od37vyr0tw" path="res://Scenes/Player_Scene/player_battle_entity.tscn" id="3_k7uhl"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("turnOrder", "playerEntity", "attackButton", "endTurnButton", "turnText", "playerUIElements")]
 script = ExtResource("1_xo6tu")
@@ -65,44 +44,5 @@ offset_right = 393.0
 offset_bottom = 393.0
 text = "End Turn"
 
-[node name="PlayerBattleEntity" type="Node2D" parent="." node_paths=PackedStringArray("Limbs")]
+[node name="PlayerBattleEntity" parent="." instance=ExtResource("3_k7uhl")]
 position = Vector2(266, 482)
-script = ExtResource("3_k7uhl")
-Limbs = [NodePath("AttackingLimb"), NodePath("AttackingLimb2")]
-metadata/_custom_type_script = "uid://6h1mulf7snnx"
-
-[node name="AttackingLimb" type="Sprite2D" parent="PlayerBattleEntity" node_paths=PackedStringArray("healthComp", "clickArea")]
-material = SubResource("ShaderMaterial_t1xl5")
-texture = ExtResource("4_6t38w")
-script = ExtResource("6_lo6j6")
-damage = 5
-hitChance = 100.0
-maxHealth = 20
-healthComp = NodePath("HealthComponent")
-clickArea = NodePath("HealthComponent/Area2D")
-targettable = false
-metadata/_custom_type_script = "uid://c4w13j1l07rr2"
-
-[node name="HealthComponent" type="Node2D" parent="PlayerBattleEntity/AttackingLimb"]
-script = ExtResource("5_5lp65")
-metadata/_custom_type_script = "uid://c5k73mydwjfa6"
-
-[node name="Area2D" type="Area2D" parent="PlayerBattleEntity/AttackingLimb/HealthComponent"]
-
-[node name="AttackingLimb2" type="Sprite2D" parent="PlayerBattleEntity" node_paths=PackedStringArray("healthComp", "clickArea")]
-material = SubResource("ShaderMaterial_0f7gp")
-texture = ExtResource("7_lo6j6")
-script = ExtResource("6_lo6j6")
-damage = 5
-hitChance = 100.0
-maxHealth = 20
-healthComp = NodePath("HealthComponent")
-clickArea = NodePath("HealthComponent/Area2D")
-targettable = false
-metadata/_custom_type_script = "uid://c4w13j1l07rr2"
-
-[node name="HealthComponent" type="Node2D" parent="PlayerBattleEntity/AttackingLimb2"]
-script = ExtResource("5_5lp65")
-metadata/_custom_type_script = "uid://c5k73mydwjfa6"
-
-[node name="Area2D" type="Area2D" parent="PlayerBattleEntity/AttackingLimb2/HealthComponent"]

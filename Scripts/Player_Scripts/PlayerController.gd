@@ -13,11 +13,15 @@ class_name Player
 @onready var allInteractions : Array[InteractableComponent] = [] 
 
  ## adds a cooldown between interactions to prevent spamming
-@export var interactionTimer : Timer
+@export var interactionTimer : Timer ##Unsure why this is here actually
 
 @export_category("Gameplay Abilities")
 @export var canMove : bool = true ##used to toggle/enable movement
 @export var canInteract : bool = true ##used to enable/disable interaction
+
+func _ready():
+	Dialogic.timeline_ended.connect(_on_timeline_ended)
+	Dialogic.timeline_started.connect(_on_timeline_started)
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -28,14 +32,13 @@ func _physics_process(_delta):
 		get_input()
 		move_and_slide()
 		
-	if  canInteract and !allInteractions.is_empty():
+	if !allInteractions.is_empty():
 		#interacts with the first interactable in list
-		if Input.is_action_just_pressed("interact"):
+		if canInteract and Input.is_action_just_pressed("interact"):
 			#runs interfact function and stores object interacted w/'s reference
 			allInteractions[0].trigger_interactable()
 			print("interacted!")
-			disableInteraction()
-			interactionTimer.start()	
+			#interactionTimer.start()	
 		#timer is start only w/ items otherwise player can interact w/ NPC
 		#multiple times due to timer reenabling interactions 
 
@@ -52,9 +55,16 @@ func enableInteraction() -> void: ##enables player's ability to interact with ot
 func disableInteraction() -> void: ## ##disables player's ability to interact with other objects/entities
 	canInteract = false
 
-func _on_interaction_timer_timeout():
+func _on_interaction_timer_timeout(): 
 	enableInteraction()
 
+func _on_timeline_ended(): ##enables movement/interaction after dialog
+	enable_movement()
+	enableInteraction()
+
+func _on_timeline_started(): ##disables movement/interaction when starting dialog
+	disable_movement()
+	disableInteraction()
 
 ##checks if entity in interaction range is Interactable or not
 ## adds latest interactable to list
