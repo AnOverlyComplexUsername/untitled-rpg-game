@@ -4,14 +4,15 @@
 [ext_resource type="Script" uid="uid://thjuq4rxpwtb" path="res://Scripts/Game_Management/BattleManager.gd" id="1_xo6tu"]
 [ext_resource type="PackedScene" uid="uid://ca4od37vyr0tw" path="res://Scenes/Player_Scene/player_battle_entity.tscn" id="3_k7uhl"]
 
-[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("turnOrder", "playerEntity", "attackButton", "endTurnButton", "turnText", "playerUIElements")]
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("turnOrder", "playerEntity", "attackButton", "endTurnButton", "backButton", "turnText", "playerUIElements")]
 script = ExtResource("1_xo6tu")
 turnOrder = [NodePath("PlayerBattleEntity"), NodePath("TestEnemy")]
 playerEntity = NodePath("PlayerBattleEntity")
 attackButton = NodePath("BattleUI/AttackButton")
 endTurnButton = NodePath("BattleUI/EndTurnButton")
+backButton = NodePath("BattleUI/BackButton")
 turnText = NodePath("BattleUI/TurnText")
-playerUIElements = [NodePath("BattleUI/AttackButton"), NodePath("BattleUI/EndTurnButton")]
+playerUIElements = [NodePath("BattleUI/AttackButton"), NodePath("BattleUI/EndTurnButton"), NodePath("BattleUI/BackButton")]
 
 [node name="TestEnemy" parent="." instance=ExtResource("1_udf6e")]
 position = Vector2(548, 243)
@@ -43,6 +44,14 @@ offset_top = 362.0
 offset_right = 393.0
 offset_bottom = 393.0
 text = "End Turn"
+
+[node name="BackButton" type="Button" parent="BattleUI"]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 315.0
+offset_right = 363.0
+offset_bottom = 346.0
+text = "Back"
 
 [node name="PlayerBattleEntity" parent="." instance=ExtResource("3_k7uhl")]
 position = Vector2(266, 482)

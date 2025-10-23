@@ -17,6 +17,7 @@ var playersTurn : bool = true ##If current turn is player's
 @export_category("Player Battle UI Elements")
 @export var attackButton : Button 
 @export var endTurnButton : Button 
+@export var backButton : Button 
 @export var turnText : Label
 @export var playerUIElements : Array[Button]
 
@@ -24,6 +25,8 @@ func _ready():
 	Global.battle_manager = self
 	attackButton.button_down.connect(lock_targetted_limb)
 	endTurnButton.button_down.connect(end_turn)
+	backButton.button_down.connect(undo_limb_turn)
+	backButton.disabled = true
 	endTurnButton.disabled = true
 	#start_combat()
 
@@ -45,12 +48,13 @@ func end_turn() -> void:
 	playerEntity.attack()
 	next_turn()
 
-##
+##Advances Player Limb Turn Order
 func next_limb_turn() -> void:
 	playerEntity.Limbs[limbTurn].deselect()
 	if limbTurn + 1 < playerEntity.Limbs.size():
 		limbTurn += 1
 		playerEntity.Limbs[limbTurn].select()
+		backButton.disabled = false
 	else:
 		attackButton.disabled = true
 		endTurnButton.disabled = false
@@ -63,10 +67,11 @@ func next_turn() -> void:
 		playersTurn = true
 		limbTurn = 0 
 		turnText.text = "Player's turn; Turn: " + str(turnNumber)
-		playerEntity.Limbs[limbTurn].select()
+		update_player_limb_selection()
 		for buttons : Button in playerUIElements:
-			buttons.disabled = false
+			buttons.disabled = false #TODO: At somepoint make this cleaner
 		endTurnButton.disabled = true
+		backButton.disabled = true
 	else:
 		playersTurn = false
 		turnText.text = "Enemy's turn; Turn: " + str(turnNumber)
@@ -78,14 +83,29 @@ func next_turn() -> void:
 	
 
 func end_combat() -> void:
-	pass
+	pass #TODO: Finish this
 	
+##Undos the last limb action done for player
+func undo_limb_turn():
+	limbTurn = clampi(limbTurn - 1,0,playerEntity.Limbs.size())
+	if limbTurn <= 0:
+		backButton.disabled = true
+	attackButton.disabled = false
+	endTurnButton.disabled = true
+	update_player_limb_selection()
+
 
 func set_targetted_limb(limb : Limb) -> void:
 	if targettedEnemyLimb != null and targettedEnemyLimb != limb:
 		targettedEnemyLimb.deselect()
 	targettedEnemyLimb = limb
 	 
+##Updates which limb should be currently selected
+func update_player_limb_selection(): 
+	for i : int in playerEntity.Limbs.size():
+		playerEntity.Limbs[i].deselect()
+	playerEntity.Limbs[limbTurn].select()
+
 func set_hovered_limb(limb : Limb) -> void:
 	hoveredEnemyLimb = limb
 	
