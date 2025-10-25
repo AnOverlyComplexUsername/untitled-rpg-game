@@ -5,7 +5,7 @@ extends AbstractComponent
 class_name HealthComponent
 
 ##Signal emitted on death; can be used to trigger post death effects
-signal death()
+signal death(limb : AbstractLimbEntity)
 signal healthDamaged()
 signal healthHealed()
 @export var maxHealth : int = 100
@@ -28,6 +28,7 @@ func heal(h : int) -> int: ##Heals health and returns remaining health
 
 func check_death() -> void: 
 	if health <= 0:
-		death.emit()
+		death.emit(self.get_parent())
+		#print(self.to_string() + " is dead!")
 ##TODO: Add death annimation before deleting at some point 
 	

@@ -15,7 +15,7 @@ func on_hit():
 	pass
 
 func mouse_hover() -> void:
-	if targettable:
+	if targettable and Global.battle_manager.allowEnemyLimbSelection:
 		if selected: 
 			self.get_material().set_shader_parameter("color", selectedColor)
 		else:
@@ -23,11 +23,12 @@ func mouse_hover() -> void:
 		Global.battle_manager.set_hovered_limb(self)
 		
 func mouse_leave():
-	Global.battle_manager.set_hovered_limb(null)
-	if not selected:
-		self.get_material().set_shader_parameter("color", deselectedColor)
+	if Global.battle_manager.allowEnemyLimbSelection:
+		Global.battle_manager.set_hovered_limb(null)
+		if not selected:
+			self.get_material().set_shader_parameter("color", deselectedColor)
 
-func select():
+func select(): 
 	selected = true
 	self.get_material().set_shader_parameter("color",selectedColor)
 
@@ -35,3 +36,9 @@ func select():
 func deselect():
 	selected = false
 	self.get_material().set_shader_parameter("color", deselectedColor)
+
+##Gets the position of the click area; 
+##useful as the sprite position doesn't match up w/ where 
+##player's cursor will be
+func get_click_area_global_position() -> Vector2:
+	return self.clickArea.get_child(0).global_position

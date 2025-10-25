@@ -43,7 +43,6 @@ hitChance = 100.0
 maxHealth = 20
 healthComp = NodePath("HealthComponent")
 clickArea = NodePath("Area2D")
-targettable = false
 metadata/_custom_type_script = "uid://c4w13j1l07rr2"
 
 [node name="HealthComponent" type="Node2D" parent="AttackingLimb"]
@@ -57,6 +56,7 @@ position = Vector2(-100, 62)
 shape = SubResource("RectangleShape2D_tghgk")
 
 [node name="AttackingLimb2" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
+modulate = Color(1, 1, 1, 0.497)
 material = SubResource("ShaderMaterial_0f7gp")
 texture = ExtResource("6_q054c")
 script = ExtResource("4_3peti")
@@ -65,7 +65,6 @@ hitChance = 100.0
 maxHealth = 20
 healthComp = NodePath("HealthComponent")
 clickArea = NodePath("Area2D")
-targettable = false
 metadata/_custom_type_script = "uid://c4w13j1l07rr2"
 
 [node name="HealthComponent" type="Node2D" parent="AttackingLimb2"]

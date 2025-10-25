@@ -8,11 +8,11 @@
 script = ExtResource("1_xo6tu")
 turnOrder = [NodePath("PlayerBattleEntity"), NodePath("TestEnemy")]
 playerEntity = NodePath("PlayerBattleEntity")
-attackButton = NodePath("BattleUI/AttackButton")
-endTurnButton = NodePath("BattleUI/EndTurnButton")
-backButton = NodePath("BattleUI/BackButton")
+attackButton = NodePath("BattleUI/PanelContainer/ActionList/AttackButton")
+endTurnButton = NodePath("BattleUI/FoldableContainer/VBoxContainer/EndTurnButton")
+backButton = NodePath("BattleUI/FoldableContainer/VBoxContainer/UndoMovesButton")
 turnText = NodePath("BattleUI/TurnText")
-playerUIElements = [NodePath("BattleUI/AttackButton"), NodePath("BattleUI/EndTurnButton"), NodePath("BattleUI/BackButton")]
+playerUIElements = [NodePath("BattleUI/PanelContainer")]
 
 [node name="BattleUI" type="Control" parent="."]
 layout_mode = 3
@@ -20,38 +20,57 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="AttackButton" type="Button" parent="BattleUI"]
-layout_mode = 0
-offset_left = 221.0
-offset_top = 358.0
-offset_right = 283.0
-offset_bottom = 389.0
-text = "Attack"
-
 [node name="TurnText" type="Label" parent="BattleUI"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_top = 35.0
+offset_right = 78.0
+offset_bottom = 58.0
 text = "Turn"
 
-[node name="EndTurnButton" type="Button" parent="BattleUI"]
+[node name="PanelContainer" type="PanelContainer" parent="BattleUI"]
+visible = false
 layout_mode = 0
-offset_left = 315.0
-offset_top = 362.0
-offset_right = 393.0
-offset_bottom = 393.0
+offset_left = 205.0
+offset_top = 430.0
+offset_right = 283.0
+offset_bottom = 531.0
+
+[node name="ActionList" type="VBoxContainer" parent="BattleUI/PanelContainer"]
+layout_mode = 2
+
+[node name="AttackButton" type="Button" parent="BattleUI/PanelContainer/ActionList"]
+layout_mode = 2
+text = "Attack"
+
+[node name="DefendButton" type="Button" parent="BattleUI/PanelContainer/ActionList"]
+layout_mode = 2
+text = "Defend"
+
+[node name="UseItemButton" type="Button" parent="BattleUI/PanelContainer/ActionList"]
+layout_mode = 2
+text = "Item"
+
+[node name="FoldableContainer" type="FoldableContainer" parent="BattleUI"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 304.0
+offset_right = 100.0
+offset_bottom = 409.0
+title = "Buh"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleUI/FoldableContainer"]
+layout_mode = 2
+
+[node name="UndoMovesButton" type="Button" parent="BattleUI/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+text = "Undo Moves"
+
+[node name="EndTurnButton" type="Button" parent="BattleUI/FoldableContainer/VBoxContainer"]
+layout_mode = 2
 text = "End Turn"
 
-[node name="BackButton" type="Button" parent="BattleUI"]
-layout_mode = 0
-offset_left = 318.0
-offset_top = 315.0
-offset_right = 363.0
-offset_bottom = 346.0
-text = "Back"
-
 [node name="PlayerBattleEntity" parent="." instance=ExtResource("3_k7uhl")]
-position = Vector2(266, 482)
+position = Vector2(383, 480)
 
 [node name="TestEnemy" parent="." instance=ExtResource("1_udf6e")]
 position = Vector2(548, 243)
