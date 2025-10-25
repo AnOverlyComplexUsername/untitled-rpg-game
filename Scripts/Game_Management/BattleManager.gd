@@ -42,6 +42,10 @@ func _process(_delta):
 	if limbTurn >= playerEntity.Limbs.size(): endTurnButton.disabled = false
 	else: endTurnButton.disabled = true
 	
+	##temporary implementation
+	if playerEntity.Limbs.size() <= 0:
+		end_combat()
+	
 func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton and event.pressed:
@@ -81,6 +85,9 @@ func start_combat() -> void:
 
 func end_turn() -> void:
 	for l : PlayerLimb in playerLimbTurnOrder:
+		if is_instance_valid(l) == false:
+			end_combat()
+			return
 		match l.get_stored_action():
 			PlayerLimb.Actions.ATTACK:
 				l.attack(l.target)
@@ -108,6 +115,8 @@ func next_turn() -> void:
 	turnNumber += 1
 	var turnOrderIndex : int = (turnNumber - 1) % turnOrder.size()
 	limbTurn = 0 
+	
+	##Player turn handling 
 	if turnOrder[turnOrderIndex] is PlayerBattleEntity:
 		for l : PlayerLimb in playerLimbTurnOrder:
 			l.targettable = true 
@@ -117,7 +126,7 @@ func next_turn() -> void:
 		backButton.disabled = true
 		reset_limb_selection()
 
-	else:
+	else: ##Enemy turn handling 
 		playersTurn = false
 		turnText.text = "Enemy's turn; Turn: " + str(turnNumber)
 		disable_limb_action_menu()
@@ -127,7 +136,9 @@ func next_turn() -> void:
 	
 
 func end_combat() -> void:
-	pass #TODO: Finish this
+	Global.scene_manager.change_overworld_scenes(
+		"res://Scenes/UI_Scenes/game_over_scene.tscn", 
+		Global.scene_manager.sceneAction.REMOVE)
 #endregion
 	
 #region UI Behavior During Combat

@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyh0jr7awg15u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u8dpg"]
+font_size = 101
+
+[node name="GameOverScene" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 111.0
+offset_right = 933.0
+offset_bottom = 392.0
+text = "You died :(((("
+label_settings = SubResource("LabelSettings_u8dpg")
+horizontal_alignment = 1
+vertical_alignment = 1
