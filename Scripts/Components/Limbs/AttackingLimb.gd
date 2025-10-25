@@ -8,10 +8,10 @@ class_name AttackingLimb
 
 ##Attacks targetted limb
 func attack(limb : AbstractLimbEntity) -> void: 
-	limb.healthComp.damage(damage) 
-	var popup = damageNumPopup.new_popup(damage, 
-	Vector2(limb.clickArea.get_child(0).global_position)
-	)	
+	 
+
+	var popup = damageNumPopup.new_popup(limb.healthComp.damage(damage), 
+	Vector2(limb.clickArea.get_child(0).global_position))	
 	get_tree().get_root().add_child(popup)
 	#limb.position
 	##TODO: implement algorithm for determining hit success

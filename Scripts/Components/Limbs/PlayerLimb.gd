@@ -3,6 +3,18 @@ extends AttackingLimb
 ##Player limb
 class_name PlayerLimb
 
+##Determines what action the limb 
+##will do at the end of the turn
+##[br]
+##ATTACK: Attacks targetted enemy
+##[br]
+##DEFEND: Applies damage reduction on limbs
+##[br]
+## ITEM: Uses an assigned item
+##[br]
+##NONE: No stored action
+enum Actions {ATTACK, DEFEND, ITEM, NONE}
+var StoredAction : Actions
 ##Transparent when not selected for an action
 var unselectedPlayerLimbColor = Color(1.0, 1.0, 1.0, 0.486)
 
@@ -14,8 +26,11 @@ var actionable : bool = true
 
 func _ready():
 	super._ready()
+	StoredAction = Actions.NONE
 	enable_transparency()
-	
+
+func get_stored_action() -> Actions:
+	return StoredAction
 func target_limb(l : Limb) -> void:
 	target = l
 

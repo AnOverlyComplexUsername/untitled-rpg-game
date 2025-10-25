@@ -20,6 +20,8 @@ var allowEnemyLimbSelection : bool = false
 var playerLimbTurnOrder : Array[PlayerLimb]
 
 @export_category("Player Battle UI Elements")
+@export var defendButton : Button
+@export var itemButton : Button
 @export var attackButton : Button 
 @export var endTurnButton : Button 
 @export var backButton : Button 
@@ -30,6 +32,7 @@ func _ready():
 	Global.battle_manager = self
 	attackButton.button_down.connect(start_attack)
 	endTurnButton.button_down.connect(end_turn)
+	defendButton.button_down.connect(defend)
 	backButton.button_down.connect(undo_limb_turn)
 	#start_combat()
 
@@ -66,7 +69,7 @@ func _input(event):
 			
 
 
-#region Handles turn order; win/lose conditions
+#region Turn order; win/lose conditions
 ##Intializes conditions for combat
 func start_combat() -> void:
 	turnNumber = 0 
@@ -78,7 +81,14 @@ func start_combat() -> void:
 
 func end_turn() -> void:
 	for l : PlayerLimb in playerLimbTurnOrder:
-		l.attack(l.target)
+		match l.get_stored_action():
+			PlayerLimb.Actions.ATTACK:
+				l.attack(l.target)
+			PlayerLimb.Actions.DEFEND:
+				l.healthComp.set_damage_reduction(0.65) 
+				#by default blocking will reduce damage by 65%
+			PlayerLimb.Actions.ITEM:
+				pass #TODO: Implement
 	next_turn()
 
 ##Advances Player Limb Turn Order
@@ -105,8 +115,8 @@ func next_turn() -> void:
 		turnText.text = "Player's turn; Turn: " + str(turnNumber)		
 		endTurnButton.disabled = true
 		backButton.disabled = true
-		targettedEnemyLimb = null
-		currentPlayerLimbSelected = null
+		reset_limb_selection()
+
 	else:
 		playersTurn = false
 		turnText.text = "Enemy's turn; Turn: " + str(turnNumber)
@@ -120,14 +130,12 @@ func end_combat() -> void:
 	pass #TODO: Finish this
 #endregion
 	
-#region Handles UI Behavior During Combat
+#region UI Behavior During Combat
 ##Undos the last limb action done for player
 func undo_limb_turn():
 	limbTurn = clampi(limbTurn - 1,0,playerEntity.Limbs.size())
 	playerLimbTurnOrder.pop_back().targettable = true
-	currentPlayerLimbSelected.deselect()
-	currentPlayerLimbSelected = null
-	allowEnemyLimbSelection = false
+	reset_limb_selection()
 	hoveredLimb = null
 	disable_limb_action_menu()
 
@@ -151,15 +159,27 @@ func start_attack():
 	allowEnemyLimbSelection = true
 	disable_limb_action_menu()
 
+##Blocks a certian percentage of damage from enemy; costs entire turn
+func defend():
+	for l : PlayerLimb in playerEntity.Limbs:
+		l.StoredAction = l.Actions.DEFEND
+		playerLimbTurnOrder.append(l)
+	end_turn()
+
 #endregion
 
-#region Handling enemy Limb targetting for player actions 
+#region  Enemy Limb targetting for player actions 
 
+##resets limb selections back to null and base settings
+func reset_limb_selection() -> void:
+	if currentPlayerLimbSelected != null:
+		currentPlayerLimbSelected.deselect()
+	currentPlayerLimbSelected = null
+	allowEnemyLimbSelection = false
+	hoveredLimb = null
 
 func get_selected_player_limb() -> PlayerLimb:
 	return currentPlayerLimbSelected
-
-
 
 ##Updates what limb is currently be hovered over
 func set_hovered_limb(limb : Limb) -> void:

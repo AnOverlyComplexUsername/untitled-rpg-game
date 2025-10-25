@@ -4,10 +4,12 @@
 [ext_resource type="Script" uid="uid://thjuq4rxpwtb" path="res://Scripts/Game_Management/BattleManager.gd" id="1_xo6tu"]
 [ext_resource type="PackedScene" uid="uid://ca4od37vyr0tw" path="res://Scenes/Player_Scene/player_battle_entity.tscn" id="3_k7uhl"]
 
-[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("turnOrder", "playerEntity", "attackButton", "endTurnButton", "backButton", "turnText", "playerUIElements")]
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("turnOrder", "playerEntity", "defendButton", "itemButton", "attackButton", "endTurnButton", "backButton", "turnText", "playerUIElements")]
 script = ExtResource("1_xo6tu")
 turnOrder = [NodePath("PlayerBattleEntity"), NodePath("TestEnemy")]
 playerEntity = NodePath("PlayerBattleEntity")
+defendButton = NodePath("BattleUI/PanelContainer/ActionList/DefendButton")
+itemButton = NodePath("BattleUI/PanelContainer/ActionList/UseItemButton")
 attackButton = NodePath("BattleUI/PanelContainer/ActionList/AttackButton")
 endTurnButton = NodePath("BattleUI/FoldableContainer/VBoxContainer/EndTurnButton")
 backButton = NodePath("BattleUI/FoldableContainer/VBoxContainer/UndoMovesButton")

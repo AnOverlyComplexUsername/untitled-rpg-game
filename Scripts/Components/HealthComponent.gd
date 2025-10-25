@@ -11,15 +11,25 @@ signal healthHealed()
 @export var maxHealth : int = 100
 var health : int = 100
 @export var damagable : bool = true
-
+@export var damageReductionPercent : float = 0
 func _ready():
 	health = maxHealth
-func damage(d : int) -> int: ##Damages health and returns remaining health 
-	if damagable: 
-		health -= d
+func damage(d : int) -> int: ##Damages health and returns damage inflicted
+	var damageValue : int = 0
+	if damagable:  
+		damageValue = d - int(d * damageReductionPercent)
 		check_death()
+		health -= damageValue
 		healthDamaged.emit()
-	return health
+	return damageValue
+
+##Takes a percentage as a decimal i.e. 50% is 0.5 
+##and sets damage reduction percentage to that
+func set_damage_reduction(p : float) -> void:
+	damageReductionPercent = p 
+
+func get_damage_reduction() -> float:
+	return damageReductionPercent 
 
 func heal(h : int) -> int: ##Heals health and returns remaining health
 	health = clampi(health + h, 0, maxHealth)
