@@ -1,5 +1,6 @@
 extends AbstractCombatEntity
-
+##Holds basic/test/default behaviors for enemy tpye entities
+class_name Enemy
 
 func attack() -> void:
 	for i in self.Limbs.size():
