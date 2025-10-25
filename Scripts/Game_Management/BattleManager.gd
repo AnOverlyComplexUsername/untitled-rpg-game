@@ -124,7 +124,9 @@ func undo_limb_turn():
 	limbTurn = clampi(limbTurn - 1,0,playerEntity.Limbs.size())
 	playerLimbTurnOrder.pop_back().targettable = true
 	currentPlayerLimbSelected = null
+	allowEnemyLimbSelection = false
 	hoveredLimb = null
+	disable_limb_action_menu()
 
 
 func disable_limb_action_menu() -> void:
@@ -153,28 +155,12 @@ func start_attack():
 #endregion
 
 #region Handling enemy Limb targetting for player actions 
-##Updates which limb should be currently selected
-##@deprecated: No longer used for current system
-func update_player_limb_selection(): 
-	var i : int = 0
-	while i < playerEntity.Limbs.size():
-		if !is_instance_valid(playerEntity.Limbs[i]) or playerEntity.Limbs[i] == null:
-			playerEntity.Limbs.remove_at(i)
-			i -= 1
-		playerEntity.Limbs[i].deselect()
-		i += 1
-		
-	playerEntity.Limbs[limbTurn].select()
+
 
 func get_selected_player_limb() -> PlayerLimb:
 	return currentPlayerLimbSelected
 
-##sets currently selected limb
-##@deprecated: No longer used for current system
-func set_targetted_limb(limb : Limb) -> void:
-	if targettedEnemyLimb != null and targettedEnemyLimb != limb:
-		targettedEnemyLimb.deselect() #deselect old selected limb
-	targettedEnemyLimb = limb
+
 
 ##Updates what limb is currently be hovered over
 func set_hovered_limb(limb : Limb) -> void:
