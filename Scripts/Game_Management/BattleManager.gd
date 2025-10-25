@@ -51,7 +51,7 @@ func _input(event):
 				currentPlayerLimbSelected = hoveredLimb
 				currentPlayerLimbSelected.select()
 				enable_limb_action_menu()
-			elif allowEnemyLimbSelection and (hoveredLimb != PlayerLimb and  hoveredLimb != null):
+			elif allowEnemyLimbSelection and (!hoveredLimb is PlayerLimb and  hoveredLimb != null):
 				targettedEnemyLimb = hoveredLimb
 				lock_targetted_limb()
 				allowEnemyLimbSelection = false
@@ -105,6 +105,8 @@ func next_turn() -> void:
 		turnText.text = "Player's turn; Turn: " + str(turnNumber)		
 		endTurnButton.disabled = true
 		backButton.disabled = true
+		targettedEnemyLimb = null
+		currentPlayerLimbSelected = null
 	else:
 		playersTurn = false
 		turnText.text = "Enemy's turn; Turn: " + str(turnNumber)
@@ -123,6 +125,7 @@ func end_combat() -> void:
 func undo_limb_turn():
 	limbTurn = clampi(limbTurn - 1,0,playerEntity.Limbs.size())
 	playerLimbTurnOrder.pop_back().targettable = true
+	currentPlayerLimbSelected.deselect()
 	currentPlayerLimbSelected = null
 	allowEnemyLimbSelection = false
 	hoveredLimb = null
@@ -147,10 +150,6 @@ func enable_limb_action_menu() -> void:
 func start_attack():
 	allowEnemyLimbSelection = true
 	disable_limb_action_menu()
-
-
-
-
 
 #endregion
 

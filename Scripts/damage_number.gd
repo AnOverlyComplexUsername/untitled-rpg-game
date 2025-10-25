@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 class_name damageNumPopup
 @onready var animation :  AnimationPlayer = $Control/DamageNumberLabel/PopupAnimation
 @onready var damageText : Label = $Control/DamageNumberLabel
@@ -15,4 +15,7 @@ static func new_popup(d : int, p : Vector2 = Vector2(0,0)) -> damageNumPopup:
 func _ready():
 	damageText.text = str(damage)
 	animation.play("Ani_Damage_number")
+	
+
+	
 	

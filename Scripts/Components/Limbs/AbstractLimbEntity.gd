@@ -21,7 +21,7 @@ func _ready():
 	healthComp.healthDamaged.connect(on_hit)
 	clickArea.mouse_entered.connect(mouse_hover)
 	clickArea.mouse_exited.connect(mouse_leave)
-@abstract func on_death() ##Determines what the limb does when it's destroyed
+@abstract func on_death(l : AbstractLimbEntity) ##Determines what the limb does when it's destroyed
 @abstract func mouse_hover() ##What happens when mouse hovers over attackable limb
 @abstract func mouse_leave() ##What happens when mouse leaves attackable limb area
 @abstract func on_hit() ##What happens when limb is hit and takes damage

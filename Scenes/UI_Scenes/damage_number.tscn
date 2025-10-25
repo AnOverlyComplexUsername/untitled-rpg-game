@@ -35,7 +35,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.46666667, 0.6666667, 1),
 "transitions": PackedFloat32Array(2.2191396, 0.7320429, 0.7320429, 0.13869615),
 "update": 0,
-"values": [Vector2(0, -22), Vector2(0, -43.61), Vector2(0, -48.035), Vector2(0, -22)]
+"values": [Vector2(0, -22), Vector2(15.18, -43.61), Vector2(26.55, -48.035), Vector2(33.01, -22)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -85,7 +85,7 @@ _data = {
 &"RESET": SubResource("Animation_jany0")
 }
 
-[node name="DamageNumber" type="Node2D"]
+[node name="DamageNumber" type="StaticBody2D"]
 script = ExtResource("1_ns4nk")
 
 [node name="Control" type="Control" parent="."]
