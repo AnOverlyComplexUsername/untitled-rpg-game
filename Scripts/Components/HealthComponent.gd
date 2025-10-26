@@ -18,8 +18,8 @@ func damage(d : int) -> int: ##Damages health and returns damage inflicted
 	var damageValue : int = 0
 	if damagable:  
 		damageValue = d - int(d * damageReductionPercent)
-		check_death()
 		health -= damageValue
+		check_death()
 		healthDamaged.emit()
 	return damageValue
 

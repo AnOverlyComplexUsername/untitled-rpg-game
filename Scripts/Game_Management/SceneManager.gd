@@ -7,6 +7,7 @@ extends Node
 @export var overworld : Node2D 
 @export var gui : Control 
 
+var previousOverworld : Node2D
 @export var currentOverworld : Node2D
 @export var currentGui : Control
 
@@ -46,6 +47,7 @@ func change_overworld_scenes(new_scecne : String, state : sceneAction) -> void:
 				currentOverworld.process_mode = Node.PROCESS_MODE_DISABLED
 			sceneAction.REMOVE:
 				overworld.remove_child(currentOverworld) #in memory, not running
+	previousOverworld = currentOverworld
 	var new = load(new_scecne).instantiate()
 	overworld.add_child(new)
 	currentOverworld = new

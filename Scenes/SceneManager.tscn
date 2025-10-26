@@ -16,12 +16,12 @@ currentOverworld = NodePath("Overworld/Test2D Overworld")
 script = ExtResource("2_7xrkh")
 metadata/_custom_type_script = "uid://b2813ntka62e2"
 
-[node name="Overworld" type="Node2D" parent="."]
-
-[node name="Test2D Overworld" parent="Overworld" instance=ExtResource("2_hjya1")]
-
 [node name="GUI Elements" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Overworld" type="Node2D" parent="."]
+
+[node name="Test2D Overworld" parent="Overworld" instance=ExtResource("2_hjya1")]

@@ -1,12 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpwv3cncla3jc"]
+[gd_scene load_steps=3 format=3 uid="uid://dpwv3cncla3jc"]
 
-[ext_resource type="PackedScene" uid="uid://vmghssv4d8ta" path="res://Scenes/Enemy_Scene/Test_enemy/test_enemy.tscn" id="1_udf6e"]
 [ext_resource type="Script" uid="uid://thjuq4rxpwtb" path="res://Scripts/Game_Management/BattleManager.gd" id="1_xo6tu"]
 [ext_resource type="PackedScene" uid="uid://ca4od37vyr0tw" path="res://Scenes/Player_Scene/player_battle_entity.tscn" id="3_k7uhl"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("turnOrder", "playerEntity", "defendButton", "itemButton", "attackButton", "endTurnButton", "backButton", "turnText", "playerUIElements")]
 script = ExtResource("1_xo6tu")
-turnOrder = [NodePath("PlayerBattleEntity"), NodePath("TestEnemy")]
+turnOrder = [NodePath("PlayerBattleEntity")]
 playerEntity = NodePath("PlayerBattleEntity")
 defendButton = NodePath("BattleUI/PanelContainer/ActionList/DefendButton")
 itemButton = NodePath("BattleUI/PanelContainer/ActionList/UseItemButton")
@@ -74,7 +73,3 @@ text = "End Turn"
 [node name="PlayerBattleEntity" parent="." instance=ExtResource("3_k7uhl")]
 position = Vector2(383, 480)
 movePriority = 1
-
-[node name="TestEnemy" parent="." instance=ExtResource("1_udf6e")]
-visible = false
-position = Vector2(548, 243)

@@ -19,7 +19,6 @@ func attack() -> void:
 			Limbs[i].attack(Limbs[i].target) 
 
 func handle_limb_death(l : AbstractLimbEntity):
-	print(l)
 	Limbs.pop_at(Limbs.find(l)).queue_free()
 	
 	

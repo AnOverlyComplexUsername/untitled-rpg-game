@@ -42,9 +42,10 @@ func _process(_delta):
 	if limbTurn >= playerEntity.Limbs.size(): endTurnButton.disabled = false
 	else: endTurnButton.disabled = true
 	
-	##temporary implementation
+	##temporary implementation; when player has no more limbs 
+	##they lose
 	if playerEntity.Limbs.size() <= 0:
-		end_combat()
+		lose_combat()
 	
 func _input(event):
 	# Mouse in viewport coordinates.
@@ -61,11 +62,10 @@ func _input(event):
 			elif allowEnemyLimbSelection and (!hoveredLimb is PlayerLimb and  hoveredLimb != null):
 				targettedEnemyLimb = hoveredLimb
 				lock_targetted_limb()
-				allowEnemyLimbSelection = false
 				if currentPlayerLimbSelected != null:
-					currentPlayerLimbSelected.deselect()
-					currentPlayerLimbSelected.targettable = false
 					playerLimbTurnOrder.append( currentPlayerLimbSelected)
+				currentPlayerLimbSelected.StoredAction = PlayerLimb.Actions.ATTACK
+				reset_limb_selection()
 				limbTurn += 1
 
 
@@ -83,11 +83,12 @@ func reset_comabat_grounds():
 
 ##Intializes conditions for combat
 func start_combat(encounter : EnemyEncounter) -> void:
+	turnOrder.clear()
 	turnOrder.append(playerEntity)
 	for e : PackedScene in encounter.Enemies:
 		var enemy = AbstractCombatEntity.new_entity(e, encounter.Enemies.get(e))
 		print(enemy)
-		get_tree().get_root().add_child(enemy)
+		self.add_child(enemy)
 		turnOrder.append(enemy)
 	turnOrder.sort_custom(sort_turn_order)
 	turnNumber = 0 
@@ -97,11 +98,12 @@ func start_combat(encounter : EnemyEncounter) -> void:
 	disable_limb_action_menu()
 	next_turn()
 	
-
+##Handles what limbs should do according to stored action 
+##Also checks if there are any enemies left; if none then combat ends
 func end_turn() -> void:
 	for l : PlayerLimb in playerLimbTurnOrder:
 		if is_instance_valid(l) == false:
-			end_combat()
+			lose_combat()
 			return
 		match l.get_stored_action():
 			PlayerLimb.Actions.ATTACK:
@@ -111,6 +113,11 @@ func end_turn() -> void:
 				#by default blocking will reduce damage by 65%
 			PlayerLimb.Actions.ITEM:
 				pass #TODO: Implement
+	for i in range(turnOrder.size()):
+		if turnOrder[i] is Enemy:
+			break
+		if i == turnOrder.size() - 1:
+			win_combat()
 	next_turn()
 
 ##Advances Player Limb Turn Order
@@ -140,6 +147,7 @@ func next_turn() -> void:
 		endTurnButton.disabled = true
 		backButton.disabled = true
 		reset_limb_selection()
+		
 
 	else: ##Enemy turn handling 
 		playersTurn = false
@@ -147,14 +155,23 @@ func next_turn() -> void:
 		disable_limb_action_menu()
 		turnOrder[turnOrderIndex].attack()
 		next_turn()
-		
-	
 
-func end_combat() -> void:
+##TODO: add rewards to player stats after		
+func win_combat() -> void:
+	Global.scene_manager.change_overworld_scenes(
+		Global.scene_manager.previousOverworld.get_path(), 
+		Global.scene_manager.sceneAction.REMOVE)
+	print("victory!")
+	turnOrder.clear()
+
+##Called when 
+func lose_combat() -> void:
 	Global.scene_manager.change_overworld_scenes(
 		"res://Scenes/UI_Scenes/game_over_scene.tscn", 
-		Global.scene_manager.sceneAction.REMOVE)
+		Global.scene_manager.sceneAction.HIDE)
 	turnOrder.clear()
+
+	
 #endregion
 	
 #region UI Behavior During Combat
