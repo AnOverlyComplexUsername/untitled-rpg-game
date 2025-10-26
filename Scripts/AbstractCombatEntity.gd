@@ -10,4 +10,11 @@ class_name AbstractCombatEntity
 ## By default it goes player then enemy, from left to right
 @export var movePriority : int = 0
 
+##Static factory for entity when spawning entites 
+##[br] must define originScene before calling
+static func new_entity(originScene : PackedScene, spawnPos : Vector2):
+	var new : AbstractCombatEntity = originScene.instantiate()
+	new.global_position = spawnPos
+	return new
+	
 @abstract func attack() -> void

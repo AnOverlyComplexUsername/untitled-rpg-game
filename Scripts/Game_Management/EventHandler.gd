@@ -14,5 +14,6 @@ func _on_dialogic_signal(argument : String):
 				"res://Scenes/Battle_Scene.tscn", 
 				Global.scene_manager.sceneAction.HIDE
 				)
-				
-			Global.battle_manager.start_combat()
+			##Duct-taped proof of concept for how encounter data is handled
+			var resource : EnemyEncounter = load("res://Resources/Enemy_Encounter_Events/Test_encounter.tres")
+			Global.battle_manager.start_combat(resource)

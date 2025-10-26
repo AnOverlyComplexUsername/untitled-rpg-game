@@ -74,8 +74,18 @@ func _input(event):
 
 
 #region Turn order; win/lose conditions
+
+##removes all combatants after a fight/before
+func reset_comabat_grounds():
+	pass
+
 ##Intializes conditions for combat
-func start_combat() -> void:
+func start_combat(encounter : EnemyEncounter) -> void:
+	for e : PackedScene in encounter.Enemies:
+		var enemy = AbstractCombatEntity.new_entity(e, encounter.Enemies.get(e))
+		print(enemy)
+		get_tree().get_root().add_child(enemy)
+
 	turnNumber = 0 
 	backButton.disabled = true
 	endTurnButton.disabled = true

@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="EnemyEncounter" load_steps=3 format=3 uid="uid://b5uku8ltixmat"]
+[gd_resource type="Resource" script_class="EnemyEncounter" load_steps=4 format=3 uid="uid://b5uku8ltixmat"]
 
+[ext_resource type="PackedScene" uid="uid://vmghssv4d8ta" path="res://Scenes/Enemy_Scene/Test_enemy/test_enemy.tscn" id="1_7kf6i"]
 [ext_resource type="Script" uid="uid://dbt7nkvig28yf" path="res://Scripts/Equipment_Scripts/Item.gd" id="1_g74pm"]
 [ext_resource type="Script" uid="uid://de8n23vao4qbh" path="res://Scripts/Components/EnemyEncounterResource.gd" id="2_7kf6i"]
 
 [resource]
 script = ExtResource("2_7kf6i")
+Enemies = Dictionary[PackedScene, Vector2]({
+ExtResource("1_7kf6i"): Vector2(600, 300)
+})
 metadata/_custom_type_script = "uid://de8n23vao4qbh"

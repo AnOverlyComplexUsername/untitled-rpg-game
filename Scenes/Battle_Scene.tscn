@@ -75,4 +75,5 @@ text = "End Turn"
 position = Vector2(383, 480)
 
 [node name="TestEnemy" parent="." instance=ExtResource("1_udf6e")]
+visible = false
 position = Vector2(548, 243)
