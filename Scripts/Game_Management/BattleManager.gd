@@ -69,8 +69,10 @@ func _input(event):
 				limbTurn += 1
 
 
-			
-			
+##Sorts turn order according to move priority		
+func sort_turn_order(a : AbstractCombatEntity, b :AbstractCombatEntity):
+	if a.movePriority > b.movePriority: return true
+	return false
 
 
 #region Turn order; win/lose conditions
@@ -81,14 +83,17 @@ func reset_comabat_grounds():
 
 ##Intializes conditions for combat
 func start_combat(encounter : EnemyEncounter) -> void:
+	turnOrder.append(playerEntity)
 	for e : PackedScene in encounter.Enemies:
 		var enemy = AbstractCombatEntity.new_entity(e, encounter.Enemies.get(e))
 		print(enemy)
 		get_tree().get_root().add_child(enemy)
-
+		turnOrder.append(enemy)
+	turnOrder.sort_custom(sort_turn_order)
 	turnNumber = 0 
 	backButton.disabled = true
 	endTurnButton.disabled = true
+	reset_comabat_grounds()
 	disable_limb_action_menu()
 	next_turn()
 	
@@ -149,6 +154,7 @@ func end_combat() -> void:
 	Global.scene_manager.change_overworld_scenes(
 		"res://Scenes/UI_Scenes/game_over_scene.tscn", 
 		Global.scene_manager.sceneAction.REMOVE)
+	turnOrder.clear()
 #endregion
 	
 #region UI Behavior During Combat

@@ -73,6 +73,7 @@ text = "End Turn"
 
 [node name="PlayerBattleEntity" parent="." instance=ExtResource("3_k7uhl")]
 position = Vector2(383, 480)
+movePriority = 1
 
 [node name="TestEnemy" parent="." instance=ExtResource("1_udf6e")]
 visible = false
