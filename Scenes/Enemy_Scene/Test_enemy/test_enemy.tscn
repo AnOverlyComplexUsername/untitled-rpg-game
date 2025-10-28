@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://vmghssv4d8ta"]
+[gd_scene load_steps=17 format=3 uid="uid://vmghssv4d8ta"]
 
+[ext_resource type="Script" uid="uid://cmd8bkpj03gi8" path="res://Scripts/Enemy_Scripts/test_enemy.gd" id="1_7wvyl"]
 [ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Assests/OutlineShader.gdshader" id="1_cwfix"]
 [ext_resource type="Script" uid="uid://cbbgx2vt87v1m" path="res://Scripts/Components/Limbs/Limb.gd" id="2_7wvyl"]
 [ext_resource type="Script" uid="uid://c5k73mydwjfa6" path="res://Scripts/Components/HealthComponent.gd" id="2_bbpht"]
+[ext_resource type="Script" uid="uid://rqj3x8xx67g5" path="res://Scripts/Components/Limbs/AttackingLimb.gd" id="5_x0j1h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mslg6"]
 resource_local_to_scene = true
@@ -15,6 +17,9 @@ shader_parameter/add_margins = true
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bbpht"]
 load_path = "res://.godot/imported/torsopng.png-770b989e243a412488681d6f32ddde78.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3ido"]
+size = Vector2(106.70196, 188.44939)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x0j1h"]
 resource_local_to_scene = true
@@ -57,89 +62,94 @@ shader_parameter/add_margins = true
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r7anc"]
 load_path = "res://.godot/imported/rightArmpng.png-2f928001433099ee996cc63047ddbd2d.ctex"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3ido"]
-size = Vector2(106.70196, 188.44939)
+[node name="TestEnemy" type="Node2D" node_paths=PackedStringArray("Limbs")]
+script = ExtResource("1_7wvyl")
+Limbs = [NodePath("Torso"), NodePath("Head"), NodePath("LeftArm"), NodePath("RightArm")]
 
-[node name="TestEnemy" type="Node2D"]
-
-[node name="Torso" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
+[node name="Torso" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea", "attachedLimbs")]
 material = SubResource("ShaderMaterial_mslg6")
 scale = Vector2(0.5810577, 0.5810579)
 texture = SubResource("CompressedTexture2D_bbpht")
 script = ExtResource("2_7wvyl")
-health = 100
+maxHealth = 30
 healthComp = NodePath("HealthComponent")
 clickArea = NodePath("TorsoArea")
+attachedLimbs = [NodePath("../Head"), NodePath("../LeftArm"), NodePath("../RightArm")]
 metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
 
 [node name="HealthComponent" type="Node2D" parent="Torso"]
 script = ExtResource("2_bbpht")
 metadata/_custom_type_script = "uid://c5k73mydwjfa6"
 
-[node name="Head" type="Sprite2D" parent="Torso" node_paths=PackedStringArray("healthComp", "clickArea")]
-material = SubResource("ShaderMaterial_x0j1h")
-scale = Vector2(0.9940977, 0.99409807)
-texture = SubResource("CompressedTexture2D_4paqk")
-script = ExtResource("2_7wvyl")
-health = 100
-healthComp = NodePath("HealthComponent")
-clickArea = NodePath("HeadArea")
-metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
-
-[node name="HealthComponent" type="Node2D" parent="Torso/Head"]
-script = ExtResource("2_bbpht")
-metadata/_custom_type_script = "uid://c5k73mydwjfa6"
-
-[node name="HeadArea" type="Area2D" parent="Torso/Head"]
-scale = Vector2(1.0059373, 1.005937)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Torso/Head/HeadArea"]
-position = Vector2(-3.441999, -92.93394)
-scale = Vector2(-4.444605, 6.6490793)
-shape = SubResource("CircleShape2D_cwfix")
-
-[node name="LeftArm" type="Sprite2D" parent="Torso" node_paths=PackedStringArray("healthComp", "clickArea")]
-material = SubResource("ShaderMaterial_o3ido")
-scale = Vector2(0.984947, 0.98823094)
-texture = SubResource("CompressedTexture2D_k1rst")
-script = ExtResource("2_7wvyl")
-health = 100
-healthComp = NodePath("HealthComponent")
-clickArea = NodePath("LeftArmArea")
-metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
-
-[node name="HealthComponent" type="Node2D" parent="Torso/LeftArm"]
-script = ExtResource("2_bbpht")
-metadata/_custom_type_script = "uid://c5k73mydwjfa6"
-
-[node name="LeftArmArea" type="Area2D" parent="Torso/LeftArm"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Torso/LeftArm/LeftArmArea"]
-position = Vector2(-106.58538, 53.986332)
-shape = SubResource("RectangleShape2D_cwfix")
-
-[node name="RightArm" type="Sprite2D" parent="Torso" node_paths=PackedStringArray("healthComp", "clickArea")]
-material = SubResource("ShaderMaterial_2jrto")
-scale = Vector2(0.9882302, 0.98823094)
-texture = SubResource("CompressedTexture2D_r7anc")
-script = ExtResource("2_7wvyl")
-health = 100
-healthComp = NodePath("HealthComponent")
-clickArea = NodePath("RightArmArea")
-metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
-
-[node name="HealthComponent" type="Node2D" parent="Torso/RightArm"]
-script = ExtResource("2_bbpht")
-metadata/_custom_type_script = "uid://c5k73mydwjfa6"
-
-[node name="RightArmArea" type="Area2D" parent="Torso/RightArm"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Torso/RightArm/RightArmArea"]
-position = Vector2(99.265305, 59.21082)
-shape = SubResource("RectangleShape2D_cwfix")
-
 [node name="TorsoArea" type="Area2D" parent="Torso"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Torso/TorsoArea"]
 position = Vector2(-1.7209994, 81.3172)
 shape = SubResource("RectangleShape2D_o3ido")
+
+[node name="Head" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
+material = SubResource("ShaderMaterial_x0j1h")
+scale = Vector2(0.57762814, 0.57762855)
+texture = SubResource("CompressedTexture2D_4paqk")
+script = ExtResource("2_7wvyl")
+maxHealth = 10
+healthComp = NodePath("HealthComponent")
+clickArea = NodePath("HeadArea")
+difficultyToHit = 0.5
+metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
+
+[node name="HealthComponent" type="Node2D" parent="Head"]
+script = ExtResource("2_bbpht")
+metadata/_custom_type_script = "uid://c5k73mydwjfa6"
+
+[node name="HeadArea" type="Area2D" parent="Head"]
+scale = Vector2(1.0059373, 1.005937)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head/HeadArea"]
+position = Vector2(-3.441999, -92.93394)
+scale = Vector2(-4.444605, 6.6490793)
+shape = SubResource("CircleShape2D_cwfix")
+
+[node name="LeftArm" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
+material = SubResource("ShaderMaterial_o3ido")
+scale = Vector2(0.5723111, 0.5742194)
+texture = SubResource("CompressedTexture2D_k1rst")
+script = ExtResource("5_x0j1h")
+damage = 340
+hitChance = 100.0
+maxHealth = 10
+healthComp = NodePath("HealthComponent")
+clickArea = NodePath("LeftArmArea")
+metadata/_custom_type_script = "uid://rqj3x8xx67g5"
+
+[node name="HealthComponent" type="Node2D" parent="LeftArm"]
+script = ExtResource("2_bbpht")
+metadata/_custom_type_script = "uid://c5k73mydwjfa6"
+
+[node name="LeftArmArea" type="Area2D" parent="LeftArm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArm/LeftArmArea"]
+position = Vector2(-106.58538, 53.986332)
+shape = SubResource("RectangleShape2D_cwfix")
+
+[node name="RightArm" type="Sprite2D" parent="." node_paths=PackedStringArray("healthComp", "clickArea")]
+material = SubResource("ShaderMaterial_2jrto")
+scale = Vector2(0.5742188, 0.5742194)
+texture = SubResource("CompressedTexture2D_r7anc")
+script = ExtResource("5_x0j1h")
+damage = 5
+hitChance = 100.0
+maxHealth = 10
+healthComp = NodePath("HealthComponent")
+clickArea = NodePath("RightArmArea")
+metadata/_custom_type_script = "uid://rqj3x8xx67g5"
+
+[node name="HealthComponent" type="Node2D" parent="RightArm"]
+script = ExtResource("2_bbpht")
+metadata/_custom_type_script = "uid://c5k73mydwjfa6"
+
+[node name="RightArmArea" type="Area2D" parent="RightArm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArm/RightArmArea"]
+position = Vector2(99.265305, 59.21082)
+shape = SubResource("RectangleShape2D_cwfix")

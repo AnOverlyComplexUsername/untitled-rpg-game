@@ -1,0 +1,4 @@
+Test_character: Fight?
+- Yes
+	[signal arg="test_fight_start"]
+- No

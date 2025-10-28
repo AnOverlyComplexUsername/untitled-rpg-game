@@ -1,13 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://dpwv3cncla3jc"]
 
-[ext_resource type="PackedScene" uid="uid://vmghssv4d8ta" path="res://Scenes/Enemy_Scene/Test_enemy/test_enemy.tscn" id="1_udf6e"]
 [ext_resource type="Script" uid="uid://thjuq4rxpwtb" path="res://Scripts/Game_Management/BattleManager.gd" id="1_xo6tu"]
+[ext_resource type="PackedScene" uid="uid://ca4od37vyr0tw" path="res://Scenes/Player_Scene/player_battle_entity.tscn" id="3_k7uhl"]
 
-[node name="BattleScene" type="Node2D"]
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("turnOrder", "playerEntity", "defendButton", "itemButton", "attackButton", "endTurnButton", "backButton", "turnText", "playerUIElements")]
 script = ExtResource("1_xo6tu")
-
-[node name="TestEnemy" parent="." instance=ExtResource("1_udf6e")]
-position = Vector2(548, 243)
+turnOrder = [NodePath("PlayerBattleEntity")]
+playerEntity = NodePath("PlayerBattleEntity")
+defendButton = NodePath("BattleUI/PanelContainer/ActionList/DefendButton")
+itemButton = NodePath("BattleUI/PanelContainer/ActionList/UseItemButton")
+attackButton = NodePath("BattleUI/PanelContainer/ActionList/AttackButton")
+endTurnButton = NodePath("BattleUI/FoldableContainer/VBoxContainer/EndTurnButton")
+backButton = NodePath("BattleUI/FoldableContainer/VBoxContainer/UndoMovesButton")
+turnText = NodePath("BattleUI/TurnText")
+playerUIElements = [NodePath("BattleUI/PanelContainer")]
 
 [node name="BattleUI" type="Control" parent="."]
 layout_mode = 3
@@ -15,10 +21,55 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="BattleUI"]
+[node name="TurnText" type="Label" parent="BattleUI"]
 layout_mode = 0
-offset_left = 221.0
-offset_top = 358.0
+offset_top = 35.0
+offset_right = 78.0
+offset_bottom = 58.0
+text = "Turn"
+
+[node name="PanelContainer" type="PanelContainer" parent="BattleUI"]
+visible = false
+layout_mode = 0
+offset_left = 205.0
+offset_top = 430.0
 offset_right = 283.0
-offset_bottom = 389.0
+offset_bottom = 531.0
+
+[node name="ActionList" type="VBoxContainer" parent="BattleUI/PanelContainer"]
+layout_mode = 2
+
+[node name="AttackButton" type="Button" parent="BattleUI/PanelContainer/ActionList"]
+layout_mode = 2
 text = "Attack"
+
+[node name="DefendButton" type="Button" parent="BattleUI/PanelContainer/ActionList"]
+layout_mode = 2
+text = "Defend"
+
+[node name="UseItemButton" type="Button" parent="BattleUI/PanelContainer/ActionList"]
+layout_mode = 2
+text = "Item"
+
+[node name="FoldableContainer" type="FoldableContainer" parent="BattleUI"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 301.0
+offset_right = 214.0
+offset_bottom = 406.0
+title = "Buh"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleUI/FoldableContainer"]
+layout_mode = 2
+
+[node name="UndoMovesButton" type="Button" parent="BattleUI/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+text = "Undo Moves"
+
+[node name="EndTurnButton" type="Button" parent="BattleUI/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+text = "End Turn"
+
+[node name="PlayerBattleEntity" parent="." instance=ExtResource("3_k7uhl")]
+position = Vector2(383, 480)
+movePriority = 1

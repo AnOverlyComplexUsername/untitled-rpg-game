@@ -1,0 +1,114 @@
+[gd_scene load_steps=6 format=3 uid="uid://nuu66vij4m2h"]
+
+[ext_resource type="Script" uid="uid://db3llkmab6k8g" path="res://Scripts/damage_number.gd" id="1_ns4nk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ow435"]
+font_size = 32
+font_color = Color(1, 0, 0, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+
+[sub_resource type="Animation" id="Animation_oufv8"]
+resource_name = "Ani_Damage_number"
+length = 1.1
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/DamageNumberLabel:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.75, 1),
+"transitions": PackedFloat32Array(1.4640859, 0.6372803, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/DamageNumberLabel:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.6666667, 1),
+"transitions": PackedFloat32Array(2.2191396, 0.7320429, 0.7320429, 0.13869615),
+"update": 0,
+"values": [Vector2(0, -22), Vector2(15.18, -43.61), Vector2(26.55, -48.035), Vector2(33.01, -22)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.0833334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jany0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/DamageNumberLabel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/DamageNumberLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -22)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6f2ja"]
+_data = {
+&"Ani_Damage_number": SubResource("Animation_oufv8"),
+&"RESET": SubResource("Animation_jany0")
+}
+
+[node name="DamageNumber" type="StaticBody2D"]
+script = ExtResource("1_ns4nk")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -101.0
+offset_top = -6.0
+offset_right = -61.0
+offset_bottom = 34.0
+
+[node name="DamageNumberLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = -22.0
+offset_right = 201.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "1"
+label_settings = SubResource("LabelSettings_ow435")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PopupAnimation" type="AnimationPlayer" parent="Control/DamageNumberLabel"]
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_6f2ja")
+}

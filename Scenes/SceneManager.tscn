@@ -1,24 +1,27 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccuvn0is77oe5"]
 
 [ext_resource type="Script" uid="uid://8ngj2l0aewnl" path="res://Scripts/Game_Management/SceneManager.gd" id="1_ebsso"]
-[ext_resource type="PackedScene" uid="uid://dpwv3cncla3jc" path="res://Scenes/Battle_Scene.tscn" id="2_7xrkh"]
+[ext_resource type="Script" uid="uid://b2813ntka62e2" path="res://Scripts/Game_Management/EventHandler.gd" id="2_7xrkh"]
 [ext_resource type="PackedScene" uid="uid://cm2jcjr8a4juu" path="res://Scenes/Test_Scene.tscn" id="2_hjya1"]
 
-[node name="SceneManager" type="Node" node_paths=PackedStringArray("overworld", "gui")]
+[node name="SceneManager" type="Node" node_paths=PackedStringArray("overworld", "gui", "currentOverworld")]
 script = ExtResource("1_ebsso")
 overworld = NodePath("Overworld")
 gui = NodePath("GUI Elements")
+currentOverworld = NodePath("Overworld/Test2D Overworld")
 
-[node name="Overworld" type="Node2D" parent="."]
+[node name="GameHandlers" type="Node" parent="."]
 
-[node name="BattleScene" parent="Overworld" instance=ExtResource("2_7xrkh")]
-
-[node name="Test2D Overworld" parent="Overworld" instance=ExtResource("2_hjya1")]
-process_mode = 4
-visible = false
+[node name="EventHandler" type="Node" parent="GameHandlers"]
+script = ExtResource("2_7xrkh")
+metadata/_custom_type_script = "uid://b2813ntka62e2"
 
 [node name="GUI Elements" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Overworld" type="Node2D" parent="."]
+
+[node name="Test2D Overworld" parent="Overworld" instance=ExtResource("2_hjya1")]
