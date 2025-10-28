@@ -2,12 +2,6 @@ extends AbstractCombatEntity
 ##Holds basic/test/default behaviors for enemy type entities
 class_name Enemy
 
-#Lazy check for if it's dead or not
-#theortically not that expensive to do; can probably be more optimizeddd
-func _process(_delta):
-	if Limbs.is_empty():
-		self.queue_free()
-
 func attack() -> void:
 	for i in self.Limbs.size():
 		if !is_instance_valid(self.Limbs[i]):

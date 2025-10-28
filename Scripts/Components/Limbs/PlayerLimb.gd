@@ -58,7 +58,9 @@ func mouse_hover(): ##What happens when mouse hovers over attackable limb:
 
 func mouse_leave(): ##What happens when mouse leaves attackable limb area:
 	if Global.battle_manager.get_selected_player_limb() != self:
-		super.mouse_leave()
+		Global.battle_manager.set_hovered_limb(null)
+		if not selected:
+			self.get_material().set_shader_parameter("color", deselectedColor)
 		enable_transparency()
 
 func on_hit(): ##What happens when limb is hit and takes damage

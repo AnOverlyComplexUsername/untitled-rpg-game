@@ -18,7 +18,7 @@ var allowEnemyLimbSelection : bool = false
 @export var turnOrder : Array[AbstractCombatEntity]
 @export var playerEntity : PlayerBattleEntity
 var playerLimbTurnOrder : Array[PlayerLimb]
-
+var enemyCount : int = 0
 @export_category("Player Battle UI Elements")
 @export var defendButton : Button
 @export var itemButton : Button
@@ -34,6 +34,8 @@ func _ready():
 	endTurnButton.button_down.connect(end_turn)
 	defendButton.button_down.connect(defend)
 	backButton.button_down.connect(undo_limb_turn)
+	playerEntity.entity_dead.connect(kill_entity)
+
 	#start_combat()
 
 func _process(_delta):
@@ -42,27 +44,28 @@ func _process(_delta):
 	if limbTurn >= playerEntity.Limbs.size(): endTurnButton.disabled = false
 	else: endTurnButton.disabled = true
 	
-	##temporary implementation; when player has no more limbs 
-	##they lose
-	if playerEntity.Limbs.size() <= 0:
-		lose_combat()
 	
 func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT :
-			if not playersTurn:
+			if not playersTurn: #Blocks inputs if it's not player's turn
 				return
+
+			#allows player to only select player limb for action before attacking
 			if hoveredLimb is PlayerLimb and !allowEnemyLimbSelection:
 				if currentPlayerLimbSelected != null:
 					currentPlayerLimbSelected.deselect()
 				currentPlayerLimbSelected = hoveredLimb
 				currentPlayerLimbSelected.select()
 				enable_limb_action_menu()
+			
+			#if player already selected attack; allows enemy limb targetting
 			elif allowEnemyLimbSelection and (!hoveredLimb is PlayerLimb and  hoveredLimb != null):
 				targettedEnemyLimb = hoveredLimb
 				lock_targetted_limb()
 				if currentPlayerLimbSelected != null:
+					currentPlayerLimbSelected.targettable = false
 					playerLimbTurnOrder.append( currentPlayerLimbSelected)
 				currentPlayerLimbSelected.StoredAction = PlayerLimb.Actions.ATTACK
 				reset_limb_selection()
@@ -81,15 +84,30 @@ func sort_turn_order(a : AbstractCombatEntity, b :AbstractCombatEntity):
 func reset_comabat_grounds():
 	pass
 
+##Kills entity when recieving kill signal
+func kill_entity(e : AbstractCombatEntity):
+	if e is PlayerBattleEntity:
+		lose_combat()
+		e.queue_free()
+	else:
+		enemyCount -= 1
+		if enemyCount <= 0:
+			win_combat()
+
+
 ##Intializes conditions for combat
 func start_combat(encounter : EnemyEncounter) -> void:
 	turnOrder.clear()
 	turnOrder.append(playerEntity)
+	enemyCount = encounter.Enemies.size()
+	#Adds enemies to scene & turn order
 	for e : PackedScene in encounter.Enemies:
 		var enemy = AbstractCombatEntity.new_entity(e, encounter.Enemies.get(e))
 		print(enemy)
 		self.add_child(enemy)
 		turnOrder.append(enemy)
+		enemy.entity_dead.connect(kill_entity)
+
 	turnOrder.sort_custom(sort_turn_order)
 	turnNumber = 0 
 	backButton.disabled = true
@@ -113,11 +131,6 @@ func end_turn() -> void:
 				#by default blocking will reduce damage by 65%
 			PlayerLimb.Actions.ITEM:
 				pass #TODO: Implement
-	for i in range(turnOrder.size()):
-		if turnOrder[i] is Enemy:
-			break
-		if i == turnOrder.size() - 1:
-			win_combat()
 	next_turn()
 
 ##Advances Player Limb Turn Order
@@ -137,9 +150,10 @@ func next_turn() -> void:
 	turnNumber += 1
 	var turnOrderIndex : int = (turnNumber - 1) % turnOrder.size()
 	limbTurn = 0 
-	
+
 	##Player turn handling 
 	if turnOrder[turnOrderIndex] is PlayerBattleEntity:
+		 #resets targetting for player limbs; allows player to click on them 
 		for l : PlayerLimb in playerLimbTurnOrder:
 			l.targettable = true 
 		playersTurn = true
@@ -147,7 +161,6 @@ func next_turn() -> void:
 		endTurnButton.disabled = true
 		backButton.disabled = true
 		reset_limb_selection()
-		
 
 	else: ##Enemy turn handling 
 		playersTurn = false

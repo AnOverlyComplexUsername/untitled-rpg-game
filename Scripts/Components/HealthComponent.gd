@@ -36,9 +36,14 @@ func heal(h : int) -> int: ##Heals health and returns remaining health
 	healthHealed.emit()
 	return health 
 
+#who let me code this; this is awful
 func check_death() -> void: 
 	if health <= 0:
+		for n in self.get_parent().get_children():
+			if n is AbstractLimbEntity:
+				n.healthComp.death.emit(n)
+				print(n)
 		death.emit(self.get_parent())
-		#print(self.to_string() + " is dead!")
+
 ##TODO: Add death annimation before deleting at some point 
 	
