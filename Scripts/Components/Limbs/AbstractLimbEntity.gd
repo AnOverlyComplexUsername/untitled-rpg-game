@@ -12,6 +12,7 @@ class_name AbstractLimbEntity
 ##Determines priority of who moves, higher number moves first
 ## By default it goes player then enemy, from left to right
 @export var movePriority : int = 0
+@export var difficultyToHit : float = 1.0 #1.0 is standard < 1 is harder to hit
 
 
 func _ready():
