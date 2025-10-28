@@ -73,6 +73,3 @@ func select():
 func deselect():
 	enable_transparency()
 	super.deselect()
-
-func on_death(_l : AbstractLimbEntity) -> void:
-	pass

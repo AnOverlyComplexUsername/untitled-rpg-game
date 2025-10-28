@@ -9,11 +9,6 @@ func _ready():
 func _on_dialogic_signal(argument : String):
 	match argument:
 		"test_fight_start": 
-			print("Battle start")
-			Global.scene_manager.change_overworld_scenes(
-				"res://Scenes/Battle_Scene.tscn", 
-				Global.scene_manager.sceneAction.HIDE
-				)
 			##Duct-taped proof of concept for how encounter data is handled
 			var resource : EnemyEncounter = load("res://Resources/Enemy_Encounter_Events/Test_encounter.tres")
-			Global.battle_manager.start_combat(resource)
+			Global.scene_manager.enable_battle_scene(resource)

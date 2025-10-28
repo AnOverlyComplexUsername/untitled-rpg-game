@@ -85,11 +85,13 @@ func reset_comabat_grounds():
 	pass
 
 ##Kills entity when recieving kill signal
+#ngl i feel like there's a memory leak here for some reason
 func kill_entity(e : AbstractCombatEntity):
 	if e is PlayerBattleEntity:
 		lose_combat()
 		e.queue_free()
 	else:
+		print(e)
 		enemyCount -= 1
 		if enemyCount <= 0:
 			win_combat()
@@ -98,6 +100,7 @@ func kill_entity(e : AbstractCombatEntity):
 ##Intializes conditions for combat
 func start_combat(encounter : EnemyEncounter) -> void:
 	turnOrder.clear()
+	playerLimbTurnOrder.clear()
 	turnOrder.append(playerEntity)
 	enemyCount = encounter.Enemies.size()
 	#Adds enemies to scene & turn order
@@ -156,6 +159,7 @@ func next_turn() -> void:
 		 #resets targetting for player limbs; allows player to click on them 
 		for l : PlayerLimb in playerLimbTurnOrder:
 			l.targettable = true 
+		playerLimbTurnOrder.clear()
 		playersTurn = true
 		turnText.text = "Player's turn; Turn: " + str(turnNumber)		
 		endTurnButton.disabled = true
@@ -169,11 +173,9 @@ func next_turn() -> void:
 		turnOrder[turnOrderIndex].attack()
 		next_turn()
 
-##TODO: add rewards to player stats after		
+##TODO: transfer rewards from encounter to player stats after		 
 func win_combat() -> void:
-	Global.scene_manager.change_overworld_scenes(
-		Global.scene_manager.previousOverworld.get_path(), 
-		Global.scene_manager.sceneAction.REMOVE)
+	Global.scene_manager.disable_battle_scene()
 	print("victory!")
 	turnOrder.clear()
 

@@ -17,6 +17,7 @@ signal entity_dead(entity :AbstractCombatEntity)
 func _process(_delta):
 	if Limbs.is_empty():
 		entity_dead.emit(self)
+		self.queue_free()
 		
 
 
@@ -33,6 +34,7 @@ static func new_entity(originScene : PackedScene, spawnPos : Vector2):
 func handle_limb_death(l : AbstractLimbEntity):
 	if !is_instance_valid(l) or Limbs.size() <= 0:
 		return
+	print(Limbs)
 	Limbs.pop_at(Limbs.find(l)).queue_free()
 
 @abstract func attack() -> void

@@ -39,10 +39,16 @@ func heal(h : int) -> int: ##Heals health and returns remaining health
 #who let me code this; this is awful
 func check_death() -> void: 
 	if health <= 0:
-		for n in self.get_parent().get_children():
-			if n is AbstractLimbEntity:
-				n.healthComp.death.emit(n)
-				print(n)
+		var parent = self.get_parent()
+		if parent is AbstractLimbEntity:
+			for l : AbstractLimbEntity in parent.attachedLimbs:
+				l.healthComp.death.emit(l)
+				print("dead emitted")
+				if l is AttackingLimb:
+					l.canAttack = false
+		if self.get_parent() is AttackingLimb:
+			#this is an awful bandaid solution 
+			self.get_parent().canAttack = false
 		death.emit(self.get_parent())
 
 ##TODO: Add death annimation before deleting at some point 

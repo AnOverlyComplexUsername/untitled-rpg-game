@@ -8,7 +8,7 @@ class_name AbstractLimbEntity
 @export var healthComp : HealthComponent ##tracks health properly
 @export var clickArea : Area2D ##Used to detect when the mouse is hovering/selecting
 @export var targettable : bool = true ##specfies if the player can target and attack it or not
-
+@export var attachedLimbs : Array[AbstractLimbEntity]
 ##Determines priority of who moves, higher number moves first
 ## By default it goes player then enemy, from left to right
 @export var movePriority : int = 0
