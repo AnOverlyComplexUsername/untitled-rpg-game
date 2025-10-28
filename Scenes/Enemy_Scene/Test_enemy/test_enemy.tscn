@@ -95,7 +95,7 @@ script = ExtResource("2_7wvyl")
 maxHealth = 10
 healthComp = NodePath("HealthComponent")
 clickArea = NodePath("HeadArea")
-difficultyToHit = 0.1
+difficultyToHit = 0.5
 metadata/_custom_type_script = "uid://cbbgx2vt87v1m"
 
 [node name="HealthComponent" type="Node2D" parent="Head"]
