@@ -4,13 +4,17 @@ extends Node2D
 ## actions during battle
 class_name BattleManager
 
+#Variables relating to target selection
 var targettedEnemyLimb : Limb = null
 var hoveredLimb : Limb = null
 var currentPlayerLimbSelected : PlayerLimb = null
 
+#Variables relating to battle progression
 var turnNumber : int = 0 ##Current turn number; used for indexing array
 var limbTurn : int = 0 ##tracks which limb's turn it is 
 var playersTurn : bool = true ##If current turn is player's
+
+var currentEncounter : EnemyEncounter = null
 
 ##Allows player to select enemy limb; only on if atatcking
 var allowEnemyLimbSelection : bool = false 
@@ -99,6 +103,7 @@ func kill_entity(e : AbstractCombatEntity):
 
 ##Intializes conditions for combat
 func start_combat(encounter : EnemyEncounter) -> void:
+	currentEncounter = encounter
 	turnOrder.clear()
 	playerLimbTurnOrder.clear()
 	turnOrder.append(playerEntity)
@@ -173,13 +178,19 @@ func next_turn() -> void:
 		turnOrder[turnOrderIndex].attack()
 		next_turn()
 
-##TODO: transfer rewards from encounter to player stats after		 
 func win_combat() -> void:
 	Global.scene_manager.disable_battle_scene()
+	reward_player()
 	print("victory!")
 	turnOrder.clear()
 
-##Called when 
+##transfer rewards from encounter to player after
+func reward_player() -> void:
+	for item : AbstractItem in  currentEncounter.get_item_reward():
+		Global.game_manager.add_to_inventory(item)
+	Global.game_manager.add_money(currentEncounter.MoneyReward)
+
+##Called when player loses important limb (torso/head)  
 func lose_combat() -> void:
 	Global.scene_manager.change_overworld_scenes(
 		"res://Scenes/UI_Scenes/game_over_scene.tscn", 

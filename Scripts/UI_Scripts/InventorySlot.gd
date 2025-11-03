@@ -33,12 +33,12 @@ func update_item_counter() -> void:
 	itemCountLabel.show()
 	
 
-##Adds an addition number of item to the stack; for stackable items
+##Adds an addition number of item to the stack and updates item counter; for stackable items
 func add_item_to_stack(i : int) -> void:
 	numOfItem += i
 	update_item_counter()
 
-##Sets the item slot's number of items to given argument	
+##Sets the item slot's number of items to given argument and updates item counter
 func set_item_stack(i : int) -> void:
 	numOfItem = i
 	update_item_counter()

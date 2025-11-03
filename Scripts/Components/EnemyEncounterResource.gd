@@ -10,3 +10,9 @@ class_name EnemyEncounter
 @export var MoneyReward : int = 0 
 ##Items player gets for defeating enemies
 @export var ItemReward : Array[AbstractItem] 
+
+func get_item_reward() -> Array:
+	return ItemReward
+
+func get_money_reward() -> int:
+	return MoneyReward

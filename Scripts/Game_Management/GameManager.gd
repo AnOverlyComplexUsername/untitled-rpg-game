@@ -10,4 +10,17 @@ class_name GameManager
 
 func _ready():
 	Global.game_manager = self
+
+##Adds new item to player's current inventory
+func add_to_inventory(item : AbstractItem) -> void:
+	if !inventory.has(item):
+		inventory[item] = 0
+		Global.inventory_manager.add_slot(item)
+	inventory[item] += 1
+	Global.inventory_manager.update_slot(item, 1)
 	
+	
+	
+##Adds money to player's current total
+func add_money(m : int):
+	money += m
