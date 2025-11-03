@@ -47,6 +47,14 @@ func _process(_delta):
 	else: backButton.disabled = true
 	if limbTurn >= playerEntity.Limbs.size(): endTurnButton.disabled = false
 	else: endTurnButton.disabled = true
+
+	##lazy fix for an issue;
+	#when player intiates dialog; inventory is enabled at the end;
+	#but this happens at the end of the stack
+	#which means that the player's first turn is before that end;
+	#so player's inventory is on during fight
+	Global.inventory_manager.disable_inventory() #Disables inventory from being opened
+
 	
 	
 func _input(event):
@@ -103,7 +111,6 @@ func kill_entity(e : AbstractCombatEntity):
 
 ##Intializes conditions for combat
 func start_combat(encounter : EnemyEncounter) -> void:
-	Global.inventory_manager.disable_inventory() #Disables inventory from being opened
 	currentEncounter = encounter
 	turnOrder.clear()
 	playerLimbTurnOrder.clear()
@@ -123,6 +130,7 @@ func start_combat(encounter : EnemyEncounter) -> void:
 	endTurnButton.disabled = true
 	reset_comabat_grounds()
 	disable_limb_action_menu()
+
 	next_turn()
 	
 ##Handles what limbs should do according to stored action 
@@ -156,6 +164,7 @@ func next_limb_turn() -> void:
 
 ##Advances turn order
 func next_turn() -> void: 
+
 	turnNumber += 1
 	var turnOrderIndex : int = (turnNumber - 1) % turnOrder.size()
 	limbTurn = 0 
