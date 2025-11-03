@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="KeyItem" load_steps=3 format=3 uid="uid://dmn136ekfo2ve"]
+
+[ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="1_cd0yn"]
+[ext_resource type="Script" uid="uid://bwpwkvu5nl7jn" path="res://Scripts/Equipment_Scripts/KeyItem.gd" id="1_cknn8"]
+
+[resource]
+script = ExtResource("1_cknn8")
+ItemIcon = ExtResource("1_cd0yn")
+ItemName = "anger"
+ItemDescription = "sadge"
+metadata/_custom_type_script = "uid://bwpwkvu5nl7jn"

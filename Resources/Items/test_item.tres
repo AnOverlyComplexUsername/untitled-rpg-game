@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="KeyItem" load_steps=3 format=3 uid="uid://b02h1bp4ymgii"]
+
+[ext_resource type="Texture2D" uid="uid://cw6q2r2tn380h" path="res://Assests/Enemy_Assests/TestEnemy Assests/my goat.png" id="1_dpxiy"]
+[ext_resource type="Script" uid="uid://bwpwkvu5nl7jn" path="res://Scripts/Equipment_Scripts/KeyItem.gd" id="1_q5txo"]
+
+[resource]
+script = ExtResource("1_q5txo")
+ItemIcon = ExtResource("1_dpxiy")
+ItemName = "explode xplode"
+ItemDescription = "I think i hate my self actually"
+type = 1
+metadata/_custom_type_script = "uid://bwpwkvu5nl7jn"

@@ -6,3 +6,4 @@ extends Node
 var scene_manager : SceneManager
 var game_manager: GameManager
 var battle_manager: BattleManager
+var inventory_manager : InventoryManager

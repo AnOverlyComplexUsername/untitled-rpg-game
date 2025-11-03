@@ -1,9 +1,81 @@
-[gd_scene format=3 uid="uid://cqifu1bth7b7g"]
+[gd_scene load_steps=2 format=3 uid="uid://cqifu1bth7b7g"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" uid="uid://crsna86i0skm4" path="res://Scripts/UI_Scripts/InventoryManager.gd" id="1_k72ie"]
+
+[node name="InventoryUI" type="Control" node_paths=PackedStringArray("keyItemContainer", "consumableItemContainer", "equipableItemContainer", "descriptionText")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_k72ie")
+keyItemContainer = NodePath("InvBackground/KeyItems/VBoxContainer")
+consumableItemContainer = NodePath("InvBackground/ConsumableItems/vboxconsumables")
+equipableItemContainer = NodePath("InvBackground/EquipableItems/vboxequipables")
+descriptionText = NodePath("RichTextLabel")
+metadata/_custom_type_script = "uid://crsna86i0skm4"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -458.0
+offset_top = -236.0
+offset_right = 453.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InvBackground" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -458.0
+offset_top = -269.0
+offset_right = 185.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="KeyItems" type="ScrollContainer" parent="InvBackground"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InvBackground/KeyItems"]
+layout_mode = 2
+theme_override_constants/separation = 104
+
+[node name="ConsumableItems" type="ScrollContainer" parent="InvBackground"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="vboxconsumables" type="VBoxContainer" parent="InvBackground/ConsumableItems"]
+layout_mode = 2
+theme_override_constants/separation = 104
+
+[node name="EquipableItems" type="ScrollContainer" parent="InvBackground"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="vboxequipables" type="VBoxContainer" parent="InvBackground/EquipableItems"]
+layout_mode = 2
+theme_override_constants/separation = 104
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -438.0
+offset_top = 153.0
+offset_right = 169.0
+offset_bottom = 252.0

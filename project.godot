@@ -17,7 +17,6 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 [autoload]
 
 Global="*res://Scripts/Game_Management/Global.gd"
-GameManager="*res://Scripts/Game_Management/GameManager.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]

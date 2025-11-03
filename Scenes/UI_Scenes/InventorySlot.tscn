@@ -1,14 +1,50 @@
-[gd_scene format=3 uid="uid://cxmshvgolrcc3"]
+[gd_scene load_steps=4 format=3 uid="uid://cxmshvgolrcc3"]
+
+[ext_resource type="Script" uid="uid://dwqg4bbgnq42r" path="res://Scripts/UI_Scripts/InventorySlot.gd" id="1_i35c3"]
+[ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="2_5awl1"]
+[ext_resource type="Resource" uid="uid://b02h1bp4ymgii" path="res://Resources/Items/test_item.tres" id="2_wp4fg"]
 
 [node name="InventorySlot" type="Control"]
 layout_mode = 3
 anchor_right = 0.035
 anchor_bottom = 0.062000003
-offset_right = -0.3199997
-offset_bottom = -0.1760025
+offset_right = 66.68
+offset_bottom = 66.824
+scale = Vector2(0.8568407, 0.8568407)
+script = ExtResource("1_i35c3")
+assignedItem = ExtResource("2_wp4fg")
+metadata/_custom_type_script = "uid://dwqg4bbgnq42r"
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="SelectButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 547.0
+offset_bottom = 106.0
+
+[node name="NameLabel" type="Label" parent="SelectButton"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 10.0
+offset_right = 383.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 28
+text = "blah blah blah blah "
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="SelectButton"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 91.0
+offset_bottom = 91.0
+texture = ExtResource("2_5awl1")
+expand_mode = 1
+
+[node name="ItemCountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 76.0
+offset_right = 101.0
+offset_bottom = 99.0
+text = "x9999"
+
+[connection signal="pressed" from="SelectButton" to="." method="_on_select_button_pressed"]
