@@ -61,10 +61,12 @@ func _on_interaction_timer_timeout():
 func _on_timeline_ended(): ##enables movement/interaction after dialog
 	enable_movement()
 	enableInteraction()
+	Global.inventory_manager.enable_inventory()
 
 func _on_timeline_started(): ##disables movement/interaction when starting dialog
 	disable_movement()
 	disableInteraction()
+	Global.inventory_manager.disable_inventory()
 
 ##checks if entity in interaction range is Interactable or not
 ## adds latest interactable to list

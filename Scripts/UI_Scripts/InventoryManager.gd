@@ -9,6 +9,7 @@ class_name InventoryManager
 @export var descriptionText : RichTextLabel
 var UIElements : Array[Control]
 var addedItemSlots : Dictionary[AbstractItem, InventorySlot]
+var enabled : bool = true 
 
 func _ready():
 	Global.inventory_manager = self
@@ -49,8 +50,16 @@ func update_description(selectedItem : AbstractItem) -> void:
 ##Deletes all inventory slots in the inventory UI 
 func reset_inventory() -> void:
 	pass
-	
+
+##Disables ability to open inventory
+func disable_inventory() -> void:
+	enabled = false
+	self.hide()
+
+##Enables ability to open inventory 
+func enable_inventory() -> void:
+	enabled = true
 	
 func _process(_delta): 
-	if Input.is_action_just_pressed("inventory"):
+	if enabled and Input.is_action_just_pressed("inventory"):
 		self.visible = !self.visible

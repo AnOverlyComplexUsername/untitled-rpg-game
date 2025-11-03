@@ -103,6 +103,7 @@ func kill_entity(e : AbstractCombatEntity):
 
 ##Intializes conditions for combat
 func start_combat(encounter : EnemyEncounter) -> void:
+	Global.inventory_manager.disable_inventory() #Disables inventory from being opened
 	currentEncounter = encounter
 	turnOrder.clear()
 	playerLimbTurnOrder.clear()
@@ -180,6 +181,8 @@ func next_turn() -> void:
 
 func win_combat() -> void:
 	Global.scene_manager.disable_battle_scene()
+	Global.inventory_manager.enable_inventory()
+
 	reward_player()
 	print("victory!")
 	turnOrder.clear()
