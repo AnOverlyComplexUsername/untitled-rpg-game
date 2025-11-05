@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://dwqg4bbgnq42r"
 
 [node name="SelectButton" type="Button" parent="."]
 layout_mode = 0
-offset_right = 547.0
+offset_right = 644.22705
 offset_bottom = 106.0
 
 [node name="NameLabel" type="Label" parent="SelectButton"]

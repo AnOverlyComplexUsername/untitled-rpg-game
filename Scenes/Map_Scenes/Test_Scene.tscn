@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://beq2x1w1dqni3" path="res://Scenes/Player_Scene/Player.tscn" id="1_4ms0o"]
 [ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="2_mrf6p"]
-[ext_resource type="PackedScene" uid="uid://ciwitgdq0lq8p" path="res://Scenes/test_interactable.tscn" id="3_mwjvy"]
-[ext_resource type="PackedScene" uid="uid://dqwpntxokg4vs" path="res://Scenes/test_interactable2.tscn" id="4_10mtb"]
+[ext_resource type="PackedScene" uid="uid://ciwitgdq0lq8p" path="res://Scenes/Interactable_Map_Elements/NPCs/test_interactable.tscn" id="3_mwjvy"]
+[ext_resource type="PackedScene" uid="uid://dqwpntxokg4vs" path="res://Scenes/Interactable_Map_Elements/NPCs/test_interactable2.tscn" id="4_10mtb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrf6p"]
 size = Vector2(127.58252, 128.39536)

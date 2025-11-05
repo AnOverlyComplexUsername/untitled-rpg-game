@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dqwpntxokg4vs"]
 
-[ext_resource type="Script" uid="uid://bbvk6suw0huho" path="res://Scenes/test_interactable_2.gd" id="1_ccmc5"]
+[ext_resource type="Script" uid="uid://bbvk6suw0huho" path="res://Scripts/Interactable_Scripts/NPC_Scripts/test_interactable_2.gd" id="1_ccmc5"]
 [ext_resource type="Script" uid="uid://cvxgrw5dxvufw" path="res://Scripts/Components/InteractableComponents.gd" id="1_fndlf"]
 [ext_resource type="Shader" uid="uid://bqn26pw2qch2b" path="res://Assests/OutlineShader.gdshader" id="2_ccmc5"]
 [ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="3_tdije"]

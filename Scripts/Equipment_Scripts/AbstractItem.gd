@@ -9,6 +9,8 @@ enum ItemType {
 	KEY_ITEM, ##Item that is key for progression
 	EQUIPMENT_ITEM ##Item that the player can equip
 	}
+	
+@export_category("Item Descriptors")
 ##Icon that will be displayed in inventory
 @export var ItemIcon : Texture 
 

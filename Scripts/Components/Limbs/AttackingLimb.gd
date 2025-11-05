@@ -5,6 +5,8 @@ class_name AttackingLimb
 
 @export var damage : int ##Damage that the limb does when attacking
 @export var hitChance : float = 1.0 ##Chance it has to hit/miss
+
+
 var canAttack = true
 ##Attacks targetted limb
 func attack(limb : AbstractLimbEntity) -> void: 
