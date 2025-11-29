@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://dypfqg6xtfkx6"]
+
+[ext_resource type="Script" uid="uid://bdox28bss1max" path="res://Scripts/AbstractPassiveEffect.gd" id="1_iq1d8"]
+[ext_resource type="Script" uid="uid://dkgk8qkfwd10c" path="res://Scripts/Equipment_Scripts/Weapon_Scripts/Equipment.gd" id="2_e7hss"]
+
+[resource]
+script = ExtResource("2_e7hss")
+equipType = 2
+ItemName = "test legs"
+type = 2
+metadata/_custom_type_script = "uid://dkgk8qkfwd10c"

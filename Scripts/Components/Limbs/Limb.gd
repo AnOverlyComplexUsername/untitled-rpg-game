@@ -8,6 +8,7 @@ var selectedColor : Color = Color("ffffffff")
 var deselectedColor : Color = Color("ffffff00")
 var hoverColor : Color = Color("ffffff60")
 var hitColor : Color =  Color("ff0034ff")
+
 func on_death(l : AbstractLimbEntity) -> void:
 	if !attachedLimbs.is_empty():
 		attachedLimbs.remove_at(attachedLimbs.find(l))

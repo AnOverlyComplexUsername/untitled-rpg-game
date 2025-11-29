@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqifu1bth7b7g"]
+[gd_scene load_steps=3 format=3 uid="uid://cqifu1bth7b7g"]
 
 [ext_resource type="Script" uid="uid://crsna86i0skm4" path="res://Scripts/UI_Scripts/InventoryManager.gd" id="1_k72ie"]
+[ext_resource type="PackedScene" uid="uid://cl2m88c1v0j1a" path="res://Scenes/UI_Scenes/inventory_ui/equip_slot.tscn" id="2_ixukt"]
 
-[node name="InventoryUI" type="Control" node_paths=PackedStringArray("keyItemContainer", "consumableItemContainer", "equipableItemContainer", "descriptionText")]
+[node name="InventoryUI" type="Control" node_paths=PackedStringArray("keyItemContainer", "consumableItemContainer", "equipableItemContainer", "descriptionText", "headEquip", "torsoEquip", "armLEquip", "armREquip", "legsEquip")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -16,6 +17,11 @@ keyItemContainer = NodePath("InvBackground/KeyItems/VBoxContainer")
 consumableItemContainer = NodePath("InvBackground/ConsumableItems/vboxconsumables")
 equipableItemContainer = NodePath("InvBackground/EquipableItems/vboxequipables")
 descriptionText = NodePath("RichTextLabel")
+headEquip = NodePath("Head")
+torsoEquip = NodePath("Torso")
+armLEquip = NodePath("Left Arm")
+armREquip = NodePath("Right Arm")
+legsEquip = NodePath("Legs")
 metadata/_custom_type_script = "uid://crsna86i0skm4"
 
 [node name="Panel" type="Panel" parent="."]
@@ -40,9 +46,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -458.0
-offset_top = -269.0
+offset_top = -267.0
 offset_right = 185.0
-offset_bottom = 137.0
+offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 current_tab = 0
@@ -79,3 +85,38 @@ offset_left = -438.0
 offset_top = 153.0
 offset_right = 169.0
 offset_bottom = 252.0
+
+[node name="Head" parent="." instance=ExtResource("2_ixukt")]
+layout_mode = 0
+offset_left = 213.0
+offset_top = -198.0
+offset_right = 253.0
+offset_bottom = -158.0
+
+[node name="Torso" parent="." instance=ExtResource("2_ixukt")]
+layout_mode = 0
+offset_left = 213.0
+offset_top = -139.0
+offset_right = 253.0
+offset_bottom = -99.0
+
+[node name="Left Arm" parent="." instance=ExtResource("2_ixukt")]
+layout_mode = 0
+offset_left = 213.0
+offset_top = -83.0
+offset_right = 253.0
+offset_bottom = -43.0
+
+[node name="Right Arm" parent="." instance=ExtResource("2_ixukt")]
+layout_mode = 0
+offset_left = 213.0
+offset_top = -25.0
+offset_right = 253.0
+offset_bottom = 15.0
+
+[node name="Legs" parent="." instance=ExtResource("2_ixukt")]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 35.0
+offset_right = 253.0
+offset_bottom = 75.0

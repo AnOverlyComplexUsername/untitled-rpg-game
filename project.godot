@@ -52,6 +52,13 @@ text/autopauses={}
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Resources/Items/": "blue",
+"res://Resources/Items/Equipment/": "yellow"
+}
+
 [input]
 
 up={

@@ -41,8 +41,8 @@ func check_death() -> void:
 	if health <= 0:
 		var parent = self.get_parent()
 		if parent is AbstractLimbEntity:
-			for l : AbstractLimbEntity in parent.attachedLimbs:
-				l.healthComp.death.emit(l)
+			for l : AbstractLimbEntity in parent.attachedLimbs: 
+				l.healthComp.death.emit(l) ##logic should be moved to parent limb
 				print("dead emitted")
 				if l is AttackingLimb:
 					l.canAttack = false

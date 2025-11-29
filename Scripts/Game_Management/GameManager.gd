@@ -7,6 +7,8 @@ class_name GameManager
 
 ##Player's inventory as a dictionary with a pair key/value pair of Item : number of Items
 @export var inventory : Dictionary[AbstractItem, int] 
+@export var equippedItems : Dictionary[AbstractEquipment.EquipmentType, AbstractEquipment]
+#TODO: add handling on equipped items on inv side first!!
 
 func _ready():
 	Global.game_manager = self

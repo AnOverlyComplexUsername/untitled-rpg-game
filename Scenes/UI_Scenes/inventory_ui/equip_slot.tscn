@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl2m88c1v0j1a"]
+
+[ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="1_c437y"]
+[ext_resource type="Script" uid="uid://ckjw1w42jkr75" path="res://Scenes/UI_Scenes/inventory_ui/Equip_Slot.gd" id="1_sley0"]
+
+[node name="Equip_Slot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 209.0
+offset_top = -209.0
+offset_right = 249.0
+offset_bottom = -169.0
+script = ExtResource("1_sley0")
+metadata/_custom_type_script = "uid://ckjw1w42jkr75"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -5.0
+offset_right = 26.0
+offset_bottom = 35.0
+
+[node name="Item_Icon" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_c437y")
+expand_mode = 1
+
+[node name="Item_Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 1.0
+offset_right = 231.0
+offset_bottom = 24.0
+scale = Vector2(0.99499494, 1)
+text = "raweewafefeawfawefawe"

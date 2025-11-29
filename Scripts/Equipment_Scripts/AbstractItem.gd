@@ -15,10 +15,10 @@ enum ItemType {
 @export var ItemIcon : Texture 
 
 ##Name of Item 
-@export var ItemName : String 
+@export var ItemName : String = "error  name"
 
 ##Desc of Item
-@export_multiline var ItemDescription : String
+@export_multiline var ItemDescription : String = "error desc"
 
 ##Used for item sorting in inventory
 @export var type : ItemType = ItemType.CONSUMABLE_ITEM

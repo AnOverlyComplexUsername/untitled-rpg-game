@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="KeyItem" load_steps=3 format=3 uid="uid://bo100cga5legl"]
+
+[ext_resource type="Texture2D" uid="uid://cw6q2r2tn380h" path="res://Assests/Enemy_Assests/TestEnemy Assests/my goat.png" id="1_w5nh6"]
+[ext_resource type="Script" uid="uid://bwpwkvu5nl7jn" path="res://Scripts/Equipment_Scripts/KeyItem.gd" id="2_vvggm"]
+
+[resource]
+script = ExtResource("2_vvggm")
+ItemIcon = ExtResource("1_w5nh6")
+ItemName = "wdwqd"
+ItemDescription = "asdas"
+type = 1
+metadata/_custom_type_script = "uid://bwpwkvu5nl7jn"

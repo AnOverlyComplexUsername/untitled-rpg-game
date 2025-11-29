@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ArmEquipment" load_steps=4 format=3 uid="uid://cwuljkb2hr6"]
+
+[ext_resource type="Script" uid="uid://bdox28bss1max" path="res://Scripts/AbstractPassiveEffect.gd" id="1_6kpm0"]
+[ext_resource type="Texture2D" uid="uid://bq7jutro05kq4" path="res://Assests/Enemy_Assests/TestEnemy Assests/leftArmpng.png" id="1_p38kw"]
+[ext_resource type="Script" uid="uid://bmb7gnb00h753" path="res://Scripts/Equipment_Scripts/Weapon_Scripts/ArmEquipment.gd" id="2_p38kw"]
+
+[resource]
+script = ExtResource("2_p38kw")
+equipType = 3
+ItemIcon = ExtResource("1_p38kw")
+ItemName = "test arm L"
+type = 2
+metadata/_custom_type_script = "uid://bmb7gnb00h753"

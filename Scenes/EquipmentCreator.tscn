@@ -1,0 +1,157 @@
+[gd_scene load_steps=3 format=3 uid="uid://citubjepbscdo"]
+
+[ext_resource type="Script" uid="uid://dkrhjoc8vwktp" path="res://Scenes/equipment_creator.gd" id="1_ge60x"]
+[ext_resource type="Texture2D" uid="uid://3l4hg7hmxvn1" path="res://Assests/icon.svg" id="1_sqet3"]
+
+[node name="EquipmentCreator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ge60x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 33.0
+offset_right = 380.0
+offset_bottom = 642.0
+theme_override_constants/separation = 19
+
+[node name="ItemType" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Key Item"
+popup/item_0/id = 0
+popup/item_1/text = "Equipment"
+popup/item_1/id = 1
+
+[node name="EquipmentType" type="OptionButton" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+item_count = 5
+popup/item_0/text = "Eyes"
+popup/item_0/id = 0
+popup/item_1/text = "Torso"
+popup/item_1/id = 1
+popup/item_2/text = "Legs"
+popup/item_2/id = 2
+popup/item_3/text = "Left Arm"
+popup/item_3/id = 3
+popup/item_4/text = "Right Arm"
+popup/item_4/id = 4
+
+[node name="NameTextEdit" type="LineEdit" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+placeholder_text = "Name Here"
+expand_to_text_length = true
+backspace_deletes_composite_character_enabled = true
+clear_button_enabled = true
+caret_blink = true
+
+[node name="DescTextEdit" type="TextEdit" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Desc Here"
+scroll_smooth = true
+caret_blink = true
+text_direction = 1
+
+[node name="HealthTextEdit" type="LineEdit" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+placeholder_text = "Health Here"
+max_length = 5
+expand_to_text_length = true
+backspace_deletes_composite_character_enabled = true
+virtual_keyboard_type = 2
+clear_button_enabled = true
+caret_blink = true
+
+[node name="DodgeTextEdit" type="LineEdit" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "0.0"
+placeholder_text = "Dodge %"
+max_length = 5
+expand_to_text_length = true
+backspace_deletes_composite_character_enabled = true
+virtual_keyboard_type = 3
+clear_button_enabled = true
+caret_blink = true
+
+[node name="DamageTextEdit" type="LineEdit" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+placeholder_text = "Damage"
+max_length = 5
+expand_to_text_length = true
+backspace_deletes_composite_character_enabled = true
+virtual_keyboard_type = 2
+clear_button_enabled = true
+caret_blink = true
+
+[node name="AccuracyTextEdit" type="LineEdit" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "1.0"
+placeholder_text = "Accuracy %"
+max_length = 5
+expand_to_text_length = true
+backspace_deletes_composite_character_enabled = true
+virtual_keyboard_type = 3
+clear_button_enabled = true
+caret_blink = true
+
+[node name="CreateButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Create!"
+
+[node name="Inv Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 421.0
+offset_top = 175.0
+offset_right = 720.50555
+offset_bottom = 461.0
+texture = ExtResource("1_sqet3")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Battle Icon" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 831.0
+offset_top = 175.0
+offset_right = 1130.5056
+offset_bottom = 461.0
+texture = ExtResource("1_sqet3")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="BattleSpriteCustomizer" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 892.0
+offset_top = 70.0
+offset_right = 1064.0
+offset_bottom = 110.0
+text = "Set Battle Sprite"
+
+[node name="InvIconCustomizer" type="Button" parent="."]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 70.0
+offset_right = 657.0
+offset_bottom = 111.0
+text = "Set Inv Item Icon!"
+
+[connection signal="item_selected" from="VBoxContainer/ItemType" to="." method="_on_item_type_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/EquipmentType" to="." method="_on_equipment_type_item_selected"]
+[connection signal="pressed" from="VBoxContainer/CreateButton" to="." method="_on_create_button_pressed"]
+[connection signal="pressed" from="BattleSpriteCustomizer" to="." method="_on_battle_sprite_customizer_pressed"]
+[connection signal="pressed" from="InvIconCustomizer" to="." method="_on_inv_icon_customizer_pressed"]

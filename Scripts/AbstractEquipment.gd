@@ -14,3 +14,5 @@ enum EquipmentType {
 @export_category("Equipment Stats")
 @export var health : int = 100
 @export var hitPercent : float
+@export var effects : Array[AbstractPassiveEffect] 
+@export var combatIcon : Texture 

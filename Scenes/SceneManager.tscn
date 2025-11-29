@@ -1,13 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccuvn0is77oe5"]
+[gd_scene load_steps=15 format=3 uid="uid://ccuvn0is77oe5"]
 
 [ext_resource type="Script" uid="uid://8ngj2l0aewnl" path="res://Scripts/Game_Management/SceneManager.gd" id="1_ebsso"]
 [ext_resource type="Script" uid="uid://b2813ntka62e2" path="res://Scripts/Game_Management/EventHandler.gd" id="2_7xrkh"]
 [ext_resource type="PackedScene" uid="uid://cm2jcjr8a4juu" path="res://Scenes/Map_Scenes/Test_Scene.tscn" id="2_hjya1"]
-[ext_resource type="PackedScene" uid="uid://cqifu1bth7b7g" path="res://Scenes/UI_Scenes/inventory.tscn" id="3_7xrkh"]
+[ext_resource type="PackedScene" uid="uid://cqifu1bth7b7g" path="res://Scenes/UI_Scenes/inventory_ui/inventory.tscn" id="3_7xrkh"]
 [ext_resource type="Script" uid="uid://butg05xyxana6" path="res://Scripts/Game_Management/GameManager.gd" id="3_83gc0"]
 [ext_resource type="Script" uid="uid://c7vq2qa48qq5o" path="res://Scripts/Equipment_Scripts/AbstractItem.gd" id="4_q4unc"]
 [ext_resource type="Resource" uid="uid://b02h1bp4ymgii" path="res://Resources/Items/test_item.tres" id="5_q4unc"]
 [ext_resource type="Resource" uid="uid://dmn136ekfo2ve" path="res://Resources/Items/test_key_item.tres" id="6_q4unc"]
+[ext_resource type="Script" uid="uid://b2panqi7eg4xk" path="res://Scripts/AbstractEquipment.gd" id="7_cl5ej"]
+[ext_resource type="Resource" uid="uid://cjam4xj4mcb2c" path="res://Resources/Items/Equipment/testEyes.tres" id="8_y4gwo"]
+[ext_resource type="Resource" uid="uid://cg5qv7sdt6crk" path="res://Resources/Items/Equipment/testTorso.tres" id="9_8kvsk"]
+[ext_resource type="Resource" uid="uid://dypfqg6xtfkx6" path="res://Resources/Items/Equipment/testLegs.tres" id="10_2qisj"]
+[ext_resource type="Resource" uid="uid://cwuljkb2hr6" path="res://Resources/Items/Equipment/TestArmL.tres" id="11_5ifd6"]
+[ext_resource type="Resource" uid="uid://0bi4mogqshbx" path="res://Resources/Items/Equipment/TestArmR.tres" id="12_mg4ue"]
 
 [node name="SceneManager" type="Node" node_paths=PackedStringArray("overworld", "gui", "currentOverworld")]
 script = ExtResource("1_ebsso")
@@ -25,7 +31,15 @@ metadata/_custom_type_script = "uid://b2813ntka62e2"
 script = ExtResource("3_83gc0")
 inventory = Dictionary[ExtResource("4_q4unc"), int]({
 ExtResource("5_q4unc"): 2,
-ExtResource("6_q4unc"): 3
+ExtResource("6_q4unc"): 3,
+ExtResource("8_y4gwo"): 1
+})
+equippedItems = Dictionary[int, ExtResource("7_cl5ej")]({
+0: ExtResource("8_y4gwo"),
+1: ExtResource("9_8kvsk"),
+2: ExtResource("10_2qisj"),
+3: ExtResource("11_5ifd6"),
+4: ExtResource("12_mg4ue")
 })
 metadata/_custom_type_script = "uid://butg05xyxana6"
 

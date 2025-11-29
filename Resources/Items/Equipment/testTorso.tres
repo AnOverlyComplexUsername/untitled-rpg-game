@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://cg5qv7sdt6crk"]
+
+[ext_resource type="Texture2D" uid="uid://c834ktsn3oayx" path="res://Assests/Enemy_Assests/TestEnemy Assests/torsopng.png" id="1_n8o7c"]
+[ext_resource type="Script" uid="uid://bdox28bss1max" path="res://Scripts/AbstractPassiveEffect.gd" id="1_q0w5g"]
+[ext_resource type="Script" uid="uid://dkgk8qkfwd10c" path="res://Scripts/Equipment_Scripts/Weapon_Scripts/Equipment.gd" id="2_n8o7c"]
+
+[resource]
+script = ExtResource("2_n8o7c")
+equipType = 1
+ItemIcon = ExtResource("1_n8o7c")
+ItemName = "test torso"
+type = 2
+metadata/_custom_type_script = "uid://dkgk8qkfwd10c"
