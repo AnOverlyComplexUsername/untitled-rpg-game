@@ -8,6 +8,7 @@ class_name BattleManager
 var targettedEnemyLimb : Limb = null
 var hoveredLimb : Limb = null
 var currentPlayerLimbSelected : PlayerLimb = null
+@onready var player_battle_entity : PlayerBattleEntity = $PlayerBattleEntity
 
 #Variables relating to battle progression
 var turnNumber : int = 0 ##Current turn number; used for indexing array
@@ -24,6 +25,7 @@ var allowEnemyLimbSelection : bool = false
 var playerLimbTurnOrder : Array[PlayerLimb]
 var enemyCount : int = 0
 @export_category("Player Battle UI Elements")
+@export_group("Elements")
 @export var defendButton : Button
 @export var itemButton : Button
 @export var attackButton : Button 
@@ -89,12 +91,41 @@ func sort_turn_order(a : AbstractCombatEntity, b :AbstractCombatEntity):
 	if a.movePriority > b.movePriority: return true
 	return false
 
+#Intializes conditions for combat
+func start_combat(encounter : EnemyEncounter) -> void:
+	reset_comabat_grounds()
+	currentEncounter = encounter
+	turnOrder.clear()
+	playerLimbTurnOrder.clear()
+	turnOrder.append(playerEntity)
+	enemyCount = encounter.Enemies.size()
+	
+	#sets correct stats from equipped inventory
+	player_battle_entity.update_equipment()
+	
+	#Adds enemies to scene & turn order
+	for e : PackedScene in encounter.Enemies:
+		var enemy = AbstractCombatEntity.new_entity(e, encounter.Enemies.get(e))
+		print(enemy)
+		self.add_child(enemy)
+		turnOrder.append(enemy)
+		enemy.entity_dead.connect(kill_entity)
 
-#region Turn order; win/lose conditions
+	turnOrder.sort_custom(sort_turn_order)
+	turnNumber = 0 
+	backButton.disabled = true
+	endTurnButton.disabled = true
+	
+	disable_limb_action_menu()
 
+	next_turn()
+	
+#TODO: Implement this
 ##removes all combatants after a fight/before
 func reset_comabat_grounds():
-	pass
+	pass	
+	
+#region Turn order; win/lose conditions
 
 ##Kills entity when recieving kill signal
 #ngl i feel like there's a memory leak here for some reason
@@ -109,30 +140,7 @@ func kill_entity(e : AbstractCombatEntity):
 			win_combat()
 
 
-##Intializes conditions for combat
-func start_combat(encounter : EnemyEncounter) -> void:
-	currentEncounter = encounter
-	turnOrder.clear()
-	playerLimbTurnOrder.clear()
-	turnOrder.append(playerEntity)
-	enemyCount = encounter.Enemies.size()
-	#Adds enemies to scene & turn order
-	for e : PackedScene in encounter.Enemies:
-		var enemy = AbstractCombatEntity.new_entity(e, encounter.Enemies.get(e))
-		print(enemy)
-		self.add_child(enemy)
-		turnOrder.append(enemy)
-		enemy.entity_dead.connect(kill_entity)
-
-	turnOrder.sort_custom(sort_turn_order)
-	turnNumber = 0 
-	backButton.disabled = true
-	endTurnButton.disabled = true
-	reset_comabat_grounds()
-	disable_limb_action_menu()
-
-	next_turn()
-	
+#
 ##Handles what limbs should do according to stored action 
 ##Also checks if there are any enemies left; if none then combat ends
 func end_turn() -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://crsna86i0skm4" path="res://Scripts/UI_Scripts/InventoryManager.gd" id="1_k72ie"]
 [ext_resource type="PackedScene" uid="uid://cl2m88c1v0j1a" path="res://Scenes/UI_Scenes/inventory_ui/equip_slot.tscn" id="2_ixukt"]
 
-[node name="InventoryUI" type="Control" node_paths=PackedStringArray("keyItemContainer", "consumableItemContainer", "equipableItemContainer", "descriptionText", "headEquip", "torsoEquip", "armLEquip", "armREquip", "legsEquip")]
+[node name="InventoryUI" type="Control" node_paths=PackedStringArray("keyItemContainer", "consumableItemContainer", "equipableItemContainer", "descriptionText", "equipButton", "headEquip", "torsoEquip", "armLEquip", "armREquip", "legsEquip")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -17,6 +17,7 @@ keyItemContainer = NodePath("InvBackground/KeyItems/VBoxContainer")
 consumableItemContainer = NodePath("InvBackground/ConsumableItems/vboxconsumables")
 equipableItemContainer = NodePath("InvBackground/EquipableItems/vboxequipables")
 descriptionText = NodePath("RichTextLabel")
+equipButton = NodePath("Panel/EquipButton")
 headEquip = NodePath("Head")
 torsoEquip = NodePath("Torso")
 armLEquip = NodePath("Left Arm")
@@ -37,6 +38,14 @@ offset_right = 453.0
 offset_bottom = 268.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="EquipButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 716.0
+offset_top = 372.0
+offset_right = 834.0
+offset_bottom = 403.0
+text = "Equip"
 
 [node name="InvBackground" type="TabContainer" parent="."]
 layout_mode = 1
@@ -120,3 +129,5 @@ offset_left = 213.0
 offset_top = 35.0
 offset_right = 253.0
 offset_bottom = 75.0
+
+[connection signal="pressed" from="Panel/EquipButton" to="." method="_on_equip_button_pressed"]

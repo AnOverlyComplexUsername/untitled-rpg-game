@@ -18,10 +18,9 @@ var StoredAction : Actions
 ##Transparent when not selected for an action
 var unselectedPlayerLimbColor = Color(1.0, 1.0, 1.0, 0.486)
 
-
-
 ##Not transparent when selected
 var selectedPlayerLimbColor = Color(1.0, 1.0, 1.0, 1.0) 
+
 
 var target : Limb = null
 var actionable : bool = true
@@ -33,9 +32,10 @@ func _ready():
 
 func get_stored_action() -> Actions:
 	return StoredAction
+	
 func target_limb(l : Limb) -> void:
 	target = l
-
+	
 func attack(limb : AbstractLimbEntity) -> void:
 	if actionable:
 		super.attack(limb)

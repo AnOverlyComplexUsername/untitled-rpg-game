@@ -16,3 +16,6 @@ enum EquipmentType {
 @export var hitPercent : float
 @export var effects : Array[AbstractPassiveEffect] 
 @export var combatIcon : Texture 
+
+func get_equipment_type() -> EquipmentType:
+	return equipType

@@ -70,6 +70,13 @@ text = "Undo Moves"
 layout_mode = 2
 text = "End Turn"
 
-[node name="PlayerBattleEntity" parent="." instance=ExtResource("3_k7uhl")]
+[node name="PlayerBattleEntity" parent="." node_paths=PackedStringArray("equippedLimbs") instance=ExtResource("3_k7uhl")]
 position = Vector2(383, 480)
+equippedLimbs = {
+0: null,
+1: null,
+2: null,
+3: NodePath("AttackingLimb"),
+4: NodePath("AttackingLimb2")
+}
 movePriority = 1

@@ -29,8 +29,15 @@ shader_parameter/add_margins = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8g268"]
 size = Vector2(59, 77)
 
-[node name="PlayerBattleEntity" type="Node2D" node_paths=PackedStringArray("Limbs")]
+[node name="PlayerBattleEntity" type="Node2D" node_paths=PackedStringArray("equippedLimbs", "Limbs")]
 script = ExtResource("1_tghgk")
+equippedLimbs = {
+0: null,
+1: null,
+2: null,
+3: NodePath("AttackingLimb"),
+4: NodePath("AttackingLimb2")
+}
 Limbs = [NodePath("AttackingLimb"), NodePath("AttackingLimb2")]
 metadata/_custom_type_script = "uid://6h1mulf7snnx"
 

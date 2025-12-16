@@ -7,6 +7,7 @@ class_name InventoryManager
 @export var consumableItemContainer : VBoxContainer
 @export var equipableItemContainer : VBoxContainer
 @export var descriptionText : RichTextLabel
+@export var equipButton : Button
 @export_group("equipment slots")
 @export var headEquip : Equip_Slot
 @export var torsoEquip : Equip_Slot
@@ -18,22 +19,25 @@ class_name InventoryManager
 var UIElements : Array[Control]
 var addedItemSlots : Dictionary[AbstractItem, InventorySlot]
 var enabled : bool = true 
+var curSelectedItem : AbstractItem
 
 func _ready():
 	Global.inventory_manager = self
+	equipButton.disabled = true 
 	load_inventory()
 	self.hide()
 	
 	
-##Loads inventory and creates item slots according to game manager inventory
-func load_inventory() -> void:
-	if !Global.game_manager.inventory.is_empty():
+##Loads inventory and creates item slots according to game manager inventory, 
+##full-load = true will load entire inventory
+func load_inventory(fullLoad : bool = true) -> void:
+	if !Global.game_manager.inventory.is_empty() and fullLoad:
 		for item : AbstractItem in Global.game_manager.inventory:
 			add_slot(item)
 	
 	#this code is awful :(
 	if !Global.game_manager.equippedItems.is_empty():
-		for type : AbstractEquipment.EquipmentType in Global.game_manager.equippedItems:
+		for type : AbstractEquipment.EquipmentType in Global.game_manager.equippedItems.keys():
 			match type:
 				AbstractEquipment.EquipmentType.EYES:
 					headEquip.set_equipment(Global.game_manager.equippedItems.get(type))
@@ -67,17 +71,24 @@ func add_slot(item : AbstractItem) -> void:
 			keyItemContainer.add_child(newSlot)
 		item.ItemType.EQUIPMENT_ITEM:
 			equipableItemContainer.add_child(newSlot)
-	newSlot.select.connect(update_description)
+	#connects slot signal 
+	newSlot.select.connect(update_inv_state)
 	
 	
 ##Update item counter
 func update_slot(item : AbstractItem, n : int) -> void:
 	var slot := addedItemSlots[item]
 	slot.add_item_to_stack(n)
-	
-func update_description(selectedItem : AbstractItem) -> void:
-	descriptionText.text = selectedItem.get_item_description()
 
+##Updates inventory state given a new item selected that's selected
+func update_inv_state(selectedItem : AbstractItem) -> void:
+	descriptionText.text = selectedItem.get_item_description()
+	curSelectedItem = selectedItem
+	if selectedItem is AbstractEquipment:
+		if !Global.game_manager.equippedItems.get(selectedItem.get_equipment_type()) == selectedItem:
+			equipButton.disabled = false
+	else:
+		equipButton.disabled = true
 
 
 ##Deletes all inventory slots in the inventory UI 
@@ -96,3 +107,12 @@ func enable_inventory() -> void:
 func _process(_delta): 
 	if enabled and Input.is_action_just_pressed("inventory"):
 		self.visible = !self.visible
+
+
+func _on_equip_button_pressed():
+	if curSelectedItem is AbstractEquipment:
+		Global.game_manager.equippedItems.set(curSelectedItem.get_equipment_type(),curSelectedItem)
+		load_inventory(false)
+	equipButton.disabled = true
+	
+	
